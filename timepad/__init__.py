@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 
 ###############################################################################
@@ -12,6 +13,9 @@ def create_app(test_config=None):
     def hello(): # a simple hello world
         return 'Hello, I am Timepad.'
 
+    from . import db
+    db.init_app(app)
+
     return app
 
 ###############################################################################
@@ -20,6 +24,7 @@ def create_app(test_config=None):
 def configure(app, test_config=None):
     app.config.from_mapping(
 	   SECRET_KEY='dev',
+       DATABASE=os.path.join(app.instance_path, 'timepad.sqlite'),
        )
 
     if test_config is None:
