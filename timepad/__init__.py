@@ -9,6 +9,10 @@ def create_app(test_config=None):
 
     configure(app, test_config=test_config)
 
+    register_blueprints(app)
+
+    create_structure(app)
+
     @app.route('/')
     def hello(): # a simple hello world
         return 'Hello, I am Timepad.'
@@ -33,3 +37,14 @@ def configure(app, test_config=None):
     else:
         # load the test config if passed in
         app.config.from_mapping(test_config)
+
+def register_blueprints(app):
+    from . import auth
+    app.register_blueprint(auth.bp)
+
+def create_structure(app):
+    # ensure the instance folder exists
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
