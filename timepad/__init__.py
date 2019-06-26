@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 
 ###############################################################################
 # App Factory
@@ -15,7 +15,7 @@ def create_app(test_config=None):
 
     @app.route('/')
     def hello(): # a simple hello world
-        return 'Hello, I am Timepad.'
+        return render_template('base.html') + '<h1>Hello World</h1>'
 
     from . import db
     db.init_app(app)
