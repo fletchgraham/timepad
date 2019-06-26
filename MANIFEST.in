@@ -1,0 +1,4 @@
+include timepad/schema.sql
+graft timepad/static
+graft timepad/templates
+global-exclude *.pyc
