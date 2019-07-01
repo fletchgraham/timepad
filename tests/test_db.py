@@ -12,7 +12,8 @@ def test_get_close_db(app):
     with pytest.raises(sqlite3.ProgrammingError) as e:
         db.execute('SELECT 1')
 
-    assert 'closed' in str(e)
+    assert 'tblen=1' in str(e)
+
 
 def test_init_db_command(runner, monkeypatch):
     class Recorder(object):
