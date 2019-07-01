@@ -8,5 +8,7 @@ def test_config():
     app = create_app(test_config={'TESTING':True})
     assert app.config['TESTING'] == True
 
-def test_hello(client):
-    assert b'Hello' in client.get('/').data
+def test_hello(client, auth):
+    assert b'Log In' in client.get('/', follow_redirects=True).data
+    auth.login()
+    assert b'timepad' in client.get('/').data

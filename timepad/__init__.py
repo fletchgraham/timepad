@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template
+from .auth import login_required
 
 ###############################################################################
 # App Factory
@@ -14,8 +15,9 @@ def create_app(test_config=None):
     create_structure(app)
 
     @app.route('/')
-    def hello(): # a simple hello world
-        return render_template('base.html') + '<h1>Hello World</h1>'
+    @login_required
+    def timeline(): # a simple hello world
+        return render_template('timeline.html')
 
     from . import db
     db.init_app(app)
