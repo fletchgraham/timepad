@@ -4,25 +4,40 @@ var DELTA_Y = 0;
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
+  noLoop();
 }
 
 function draw() {
-  background(35);
+  background(24);
   ellipse(width/2, height/2 + OFFSET, 100);
 }
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  redraw();
 }
 
 function touchStarted() {
   START = OFFSET
   DELTA_Y = mouseY;
   DOWN_Y = mouseY;
+  redraw();
   return false;
 }
 
 function touchMoved() {
   DELTA_Y = mouseY - DOWN_Y;
   OFFSET = START + DELTA_Y;
+  redraw();
+}
+
+function ep(px) {
+  // convert a screen Y coordinate to an epoch
+  
+  // 1) undo the translation to the center of the window.
+  // 2) flip everything and undo the zoom.
+  // 3) undo the offset
+  
+  ep = round((-(px - height/2) * z + OFFSET));
+  return ep;
 }
