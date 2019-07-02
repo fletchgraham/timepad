@@ -30,14 +30,3 @@ function touchMoved() {
   OFFSET = START + DELTA_Y;
   redraw();
 }
-
-function ep(px) {
-  // convert a screen Y coordinate to an epoch
-  
-  // 1) undo the translation to the center of the window.
-  // 2) flip everything and undo the zoom.
-  // 3) undo the offset
-  
-  ep = round((-(px - height/2) * z + OFFSET));
-  return ep;
-}
