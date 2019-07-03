@@ -9,7 +9,9 @@ function setup() {
 
 function draw() {
   background(24);
-  ellipse(width/2, height/2 + OFFSET, 100);
+  noFill();
+  stroke(255);
+  ellipse(width/2, height/2 + OFFSET, 200);
 }
 
 function windowResized() {

@@ -19,6 +19,11 @@ def create_app(test_config=None):
     def timeline(): # a simple hello world
         return render_template('timeline.html')
 
+    @app.route('/import')
+    @login_required
+    def import_frames():
+        return render_template('timeline.html')
+
     from . import db
     db.init_app(app)
 

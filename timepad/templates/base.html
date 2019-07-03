@@ -1,18 +1,30 @@
 <!doctype html>
+
+<head>
 <title>{% block title %}{% endblock %} - timepad</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% block extra_head %}{% endblock %}
+</head>
+
+<body>
+
+<div style="position: fixed; width: 100%;">
+
 <nav>
   <h1>timepad</h1>
   <ul>
     {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <li><span>{{ g.user['username'] }}</span></li>
+      <li><a href="{{ url_for('import_frames') }}">Import</a></li>
+      <li><a href="">Export</a></li>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
     {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
     {% endif %}
   </ul>
 </nav>
+
 <section class="content">
   <header>
     {% block header %}{% endblock %}
@@ -22,3 +34,7 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+
+</div>
+
+</body>
