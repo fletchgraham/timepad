@@ -1,7 +1,9 @@
 <!doctype html>
 
 <head>
-<title>{% block title %}{% endblock %} - timepad</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"">
+<title>timepad</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 {% block extra_head %}{% endblock %}
@@ -9,7 +11,7 @@
 
 <body>
 
-<div style="position: fixed; width: 100%;">
+<div style="position:fixed; width: 100%;">
 
 <nav>
   <h1>timepad</h1>
