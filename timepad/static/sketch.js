@@ -32,6 +32,7 @@ function touchMoved() {
   DELTA_Y = mouseY - DOWN_Y;
   OFFSET = START + DELTA_Y;
   redraw();
+  return false;
 }
 
 function gotFile(file) {
