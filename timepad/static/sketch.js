@@ -1,11 +1,20 @@
+
+///// Global Variales /////
+
 var OFFSET = 0;
 var DOWN_Y = 0;
 var DELTA_Y = 0;
+
+let FILE = 'Try dropping a file anywhere.';
+let FRAMES = [];
+
+///// Setup and Draw /////
 
 function setup() {
   const c = createCanvas(windowWidth,windowHeight);
   background(24);
   c.drop(gotFile);
+  textSize(20)
 }
 
 function draw() {
@@ -13,8 +22,13 @@ function draw() {
   noFill();
   stroke(255);
   ellipse(width/2, height/2 + OFFSET, 200);
+  fill(255);
+  noStroke();
+  text(FILE, 50, 200)
   noLoop();
 }
+
+///// Events /////
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -36,8 +50,12 @@ function touchMoved() {
 }
 
 function gotFile(file) {
-  frames = loadJSON(file.data);
-  console.log(file.name);
-  console.log(file.size);
-  console.log(frames);
+  FILE = 'Got that file :)';
+  redraw();
 }
+
+///// Models /////
+
+// frame array: [start, stop, project, uid, tags, edited?]
+
+
