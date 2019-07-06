@@ -19,11 +19,6 @@ def create_app(test_config=None):
     def timeline(): # a simple hello world
         return render_template('timeline.html')
 
-    @app.route('/import')
-    @login_required
-    def import_frames():
-        return render_template('timeline.html')
-
     from . import db
     db.init_app(app)
 
@@ -48,6 +43,9 @@ def configure(app, test_config=None):
 def register_blueprints(app):
     from . import auth
     app.register_blueprint(auth.bp)
+
+    from . import data
+    app.register_blueprint(data.bp)
 
 def create_structure(app):
     # ensure the instance folder exists

@@ -27,9 +27,18 @@ def register():
             error = 'User {} is already registered.'.format(username)
 
         if error is None:
+            # add the user and password
             db.execute(
                 'INSERT INTO user (username, password) VALUES (?, ?)',
                 (username, generate_password_hash(password))
+            )
+            # gotta grab the id of the user we just added
+            user_id = int(db.execute('select last_insert_rowid()').fetchone()[0])
+
+            # add empty json strings to the timeline table
+            db.execute(
+                "INSERT INTO timeline (colors, frames, author_id) VALUES ('[{}]', '[[]]', ?)",
+                (user_id,)
             )
             db.commit()
             return redirect(url_for('auth.login'))

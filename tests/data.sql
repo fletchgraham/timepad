@@ -5,4 +5,4 @@ values
 
 insert into timeline (colors, frames, author_id)
 values
-  ('[{}]', '[{}]', 1);
+  ('[{}]', '[[],[]]', 1);
