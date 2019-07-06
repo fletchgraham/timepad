@@ -16,15 +16,18 @@ let FRAMES = [];
 
 // modes
 
-var MODE = 'IDLE';
+var MODE = 'PAN';
 
 //////////////////////////////////////////////////////////////////////////////
 // Setup and Draww
 
 function setup() {
-  OFFSET = 0;
+  OFFSET = now();
   const c = createCanvas(windowWidth,windowHeight);
   background(24);
+  button = createButton('toggle mode');
+  button.position(10, 100);
+  button.mousePressed(toggleMode);
   c.drop(gotFile); // dropfile event triggers callback
 
   // init ui elements
@@ -34,19 +37,27 @@ function setup() {
 function draw() {
   background(24);
   timeline.render();
+  for (f in FRAMES) {
+    FRAMES[f].render();
+  }
   drawDebug();
-  //noLoop();
+  noLoop();
 }
 
 //////////////////////////////////////////////////////////////////////////////
 // Events
 
 function windowResized() {
+
   resizeCanvas(windowWidth, windowHeight);
   redraw();
 }
 
 function touchStarted() {
+  if (MODE == 'CREATE') {
+    new_frame = new Frame(toSeconds(mouseY));
+    FRAMES.push(new_frame);
+  }
   timeline.touched();
   redraw();
 }
@@ -68,7 +79,9 @@ function gotFile(file) {
 class Timeline {
 
   touched() {
-    MODE = 'PAN';
+    if (MODE != 'PAN') {
+      return false;
+    }
     START = OFFSET;
     DELTA_Y = mouseY;
     DOWN_Y = mouseY;
@@ -98,9 +111,52 @@ class Timeline {
 }
 
 //////////////////////////////////////////////////////////////////////////////
-// Models
+// Frame
 
 // frame array: [start, stop, project, uid, tags, edited?]
+
+class Frame {
+  constructor(start) {
+    this.start = start;
+    this.stop = start + 100;
+    this.project = 'project';
+    this.selected = true;
+  }
+
+  touched() {
+    MODE = 'PAN'; // still want to pan
+    return true;
+  }
+
+  dragged() {
+    return true;
+  }
+
+  render() {
+    // frame rect
+    rectMode(CORNERS);
+    stroke(0, 0 , 255);
+    fill(0,0,100);
+    rect(50, toPixels(this.stop), width - 50, toPixels(this.start), 10);
+
+    // frame info
+    noStroke();
+    fill(255);
+    text(this.project, 60, toPixels(this.start)-10)
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Mode Toggle
+
+function toggleMode() {
+  if (MODE == 'PAN') {
+    MODE = 'CREATE';
+  }
+  else if (MODE == 'CREATE') {
+    MODE = 'PAN';
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////////
 // Misc
@@ -111,12 +167,12 @@ function now() {
 }
 
 function toSeconds(pixels) {
-  secs = Math.round(-(pixels - height/2) * ZOOM + now() + OFFSET);
+  secs = Math.round(-(pixels - height/2) * ZOOM + OFFSET);
   return secs;
 }
 
 function toPixels(seconds) {
-  px = -((seconds - now() -  OFFSET) / ZOOM) + height/2;
+  px = -((seconds - OFFSET) / ZOOM) + height/2;
   return px;
 }
 
@@ -126,7 +182,7 @@ function drawTimeline() {
       stroke(50);
       fill(50);
       line(0, i, width, i);
-      textSize(12);
+      textSize(16);
       text(str(toSeconds(i)), 10, i);
     }
   }
@@ -135,7 +191,7 @@ function drawTimeline() {
 function drawDebug() {
   // font settings
   fill(255);
-  textSize(20);
+  textSize(16);
   noStroke();
   textAlign(RIGHT);
   margin = 10;
@@ -147,6 +203,11 @@ function drawDebug() {
   // draw now marker
   text('<<<<<<< NOW >>>>>>>', width - margin, toPixels(now()));
 
+  textAlign(CENTER);
+  textSize(30);
+  text(MODE, width/2, 100);
+
   textAlign(LEFT);
+
 }
 
