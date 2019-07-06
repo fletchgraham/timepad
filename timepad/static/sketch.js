@@ -5,6 +5,7 @@
 // view transforms
 var OFFSET = 0;
 var ZOOM = 1;
+var START = 0;
 
 // for calculating drag deltas
 var DOWN_Y = 0;
@@ -12,6 +13,10 @@ var DELTA_Y = 0;
 
 let FILE = '';
 let FRAMES = [];
+
+// modes
+
+var MODE = 'IDLE';
 
 //////////////////////////////////////////////////////////////////////////////
 // Setup and Draww
@@ -21,11 +26,14 @@ function setup() {
   const c = createCanvas(windowWidth,windowHeight);
   background(24);
   c.drop(gotFile); // dropfile event triggers callback
+
+  // init ui elements
+  timeline = new Timeline();
 }
 
 function draw() {
   background(24);
-  drawTimeline();
+  timeline.render();
   drawDebug();
   //noLoop();
 }
@@ -39,15 +47,12 @@ function windowResized() {
 }
 
 function touchStarted() {
-  START = OFFSET
-  DELTA_Y = mouseY;
-  DOWN_Y = mouseY;
+  timeline.touched();
   redraw();
 }
 
 function touchMoved() {
-  DELTA_Y = mouseY - DOWN_Y;
-  OFFSET = START + DELTA_Y * ZOOM;
+  timeline.dragged();
   redraw();
   return false;
 }
@@ -58,10 +63,44 @@ function gotFile(file) {
 }
 
 //////////////////////////////////////////////////////////////////////////////
+// Timeline
+
+class Timeline {
+
+  touched() {
+    MODE = 'PAN';
+    START = OFFSET;
+    DELTA_Y = mouseY;
+    DOWN_Y = mouseY;
+    return true;
+  }
+
+  dragged() {
+    if (MODE != 'PAN') {
+      return false;
+    }
+    DELTA_Y = mouseY - DOWN_Y;
+    OFFSET = START + DELTA_Y * ZOOM;
+    return true;
+  }
+
+  render() {
+    for (var i = 0; i < height; i++) {
+      if ((toSeconds(i)) % 100 == 0) {
+        stroke(50);
+        fill(50);
+        line(0, i, width, i);
+        textSize(12);
+        text(str(toSeconds(i)), 10, i);
+      }
+    }
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
 // Models
 
 // frame array: [start, stop, project, uid, tags, edited?]
-
 
 //////////////////////////////////////////////////////////////////////////////
 // Misc
@@ -87,8 +126,8 @@ function drawTimeline() {
       stroke(50);
       fill(50);
       line(0, i, width, i);
-      textSize(16);
-      text(str(toSeconds(i)), 50, i);
+      textSize(12);
+      text(str(toSeconds(i)), 10, i);
     }
   }
 }
@@ -99,11 +138,11 @@ function drawDebug() {
   textSize(20);
   noStroke();
   textAlign(RIGHT);
-  margin = 50;
+  margin = 10;
 
   // test dropfile text
-  text(FILE, width - margin, height - margin)
-  text('offset: ' + str(OFFSET), width - margin, height - margin - 25);
+  text(FILE, width - margin, height - margin - 25)
+  text('offset: ' + str(OFFSET), width - margin, height - margin);
 
   // draw now marker
   text('<<<<<<< NOW >>>>>>>', width - margin, toPixels(now()));
