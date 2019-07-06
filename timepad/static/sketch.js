@@ -19,12 +19,22 @@ function setup() {
 
 function draw() {
   background(24);
+
+  drawTimeline();
+
+  // test elipse
   noFill();
   stroke(255);
   ellipse(width/2, height/2 + OFFSET, 200);
+
+  // test dropfile text
   fill(255);
   noStroke();
-  text(FILE, 50, 200)
+  text(FILE, 50, 100)
+
+  
+
+  // don't redraw unless something happens
   noLoop();
 }
 
@@ -57,5 +67,15 @@ function gotFile(file) {
 ///// Models /////
 
 // frame array: [start, stop, project, uid, tags, edited?]
+
+
+function drawTimeline() {
+  for (var i = 0; i < height; i++) {
+    if ((i - OFFSET) % 100 == 0) {
+      stroke(50);
+      line(0, i, width, i)
+    }
+  }
+}
 
 
