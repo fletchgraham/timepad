@@ -25,9 +25,12 @@ function setup() {
   OFFSET = now();
   const c = createCanvas(windowWidth,windowHeight);
   background(24);
-  button = createButton('toggle mode');
-  button.position(10, 100);
-  button.mousePressed(toggleMode);
+
+  // add frame button
+  button = createButton('Add Frame');
+  button.position(10, 45);
+  button.mousePressed(createFrame);
+
   c.drop(gotFile); // dropfile event triggers callback
 
   // init ui elements
@@ -54,10 +57,6 @@ function windowResized() {
 }
 
 function touchStarted() {
-  if (MODE == 'CREATE') {
-    new_frame = new Frame(toSeconds(mouseY));
-    FRAMES.push(new_frame);
-  }
   timeline.touched();
   redraw();
 }
@@ -123,15 +122,6 @@ class Frame {
     this.selected = true;
   }
 
-  touched() {
-    MODE = 'PAN'; // still want to pan
-    return true;
-  }
-
-  dragged() {
-    return true;
-  }
-
   render() {
     // frame rect
     rectMode(CORNERS);
@@ -146,20 +136,14 @@ class Frame {
   }
 }
 
-//////////////////////////////////////////////////////////////////////////////
-// Mode Toggle
-
-function toggleMode() {
-  if (MODE == 'PAN') {
-    MODE = 'CREATE';
-  }
-  else if (MODE == 'CREATE') {
-    MODE = 'PAN';
-  }
+function createFrame() {
+  new_frame = new Frame(toSeconds(height / 2 + 50));
+  FRAMES.push(new_frame);
 }
 
+
 //////////////////////////////////////////////////////////////////////////////
-// Misc
+// Helpful Utilities
 
 function now() {
   n = new Date() / 1000;
@@ -176,17 +160,8 @@ function toPixels(seconds) {
   return px;
 }
 
-function drawTimeline() {
-  for (var i = 0; i < height; i++) {
-    if ((toSeconds(i)) % 100 == 0) {
-      stroke(50);
-      fill(50);
-      line(0, i, width, i);
-      textSize(16);
-      text(str(toSeconds(i)), 10, i);
-    }
-  }
-}
+//////////////////////////////////////////////////////////////////////////////
+// Debug Info
 
 function drawDebug() {
   // font settings
@@ -202,10 +177,6 @@ function drawDebug() {
 
   // draw now marker
   text('<<<<<<< NOW >>>>>>>', width - margin, toPixels(now()));
-
-  textAlign(CENTER);
-  textSize(30);
-  text(MODE, width/2, 100);
 
   textAlign(LEFT);
 
