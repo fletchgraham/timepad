@@ -10,7 +10,7 @@ bp = Blueprint('data', __name__, url_prefix='/data')
 @login_required
 def register():
     if request.method == 'POST':
-        return 'hello'
+        return request.data
 
     db = get_db()
     frames = db.execute('select * from timeline where author_id=?', (session.get('user_id'),)).fetchone()['frames']

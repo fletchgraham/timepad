@@ -6,3 +6,8 @@ def test_data_loggedin(client, auth):
     auth.login()
     res = client.get('data/frames').data
     assert b'[[],[]]' in res
+
+def test_data_post(client, auth):
+    auth.login()
+    res = client.post('data/frames', data='data').data
+    assert b'data' in res
