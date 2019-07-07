@@ -18,7 +18,7 @@ let FRAMES = [];
 var MODE = 'PAN';
 
 let add_frame_button;
-let RES;
+let delete_frame_button;
 
 let BUTTON_PRESSED = false;
 
@@ -31,9 +31,16 @@ function setup() {
   background(24);
   const c = createCanvas(windowWidth,windowHeight);
 
+  // delet frame button
+  delete_frame_button = createButton('Delete Frame');
+  delete_frame_button.style('color', 'red')
+  delete_frame_button.position(10, 45);
+  delete_frame_button.mousePressed(deleteFrame);
+  delete_frame_button.addClass('button')
+  
   // add frame button
   add_frame_button = createButton('Add Frame');
-  add_frame_button.position(10, 45);
+  add_frame_button.position(10, 100);
   add_frame_button.mousePressed(createFrame);
   add_frame_button.addClass('button')
 
@@ -168,6 +175,18 @@ class Frame {
   }
 }
 
+function deleteFrame() {
+  BUTTON_PRESSED = true;
+  for (f in FRAMES) {
+    if (FRAMES[f].selected == true) {
+      FRAMES.splice(f, 1);
+    }
+  }
+  httpPost('/data/frames', JSON.stringify(FRAMES), function(result) {
+    redraw();
+  });
+}
+
 function createFrame() {
   BUTTON_PRESSED = true;
   for (f in FRAMES) {
@@ -176,7 +195,6 @@ function createFrame() {
   new_frame = new Frame(toSeconds(height / 2));
   FRAMES.push(new_frame);
   httpPost('/data/frames', JSON.stringify(FRAMES), function(result) {
-    RES = str(result);
     redraw();
   });
 }
@@ -205,7 +223,6 @@ function loadFrames() {
       new_frame.project = json_response[j].project;
       new_frame.selected = false;
       FRAMES.push(new_frame);
-      console.log('created frame from json.')
     }
     redraw();
   });
@@ -239,7 +256,7 @@ function drawCrosshair() {
   var mid = height/2;
   line(width/2 - size, mid, width/2 + size, mid);
   mid = width/2;
-  line(mid, height/2 - size, mid, height/2 + size)
+  line(mid, height/2 - size, mid, height/2 + size);
 }
 
 function drawDebug() {
@@ -251,8 +268,7 @@ function drawDebug() {
   margin = 10;
 
   // test dropfile text
-  text(FILE, width - margin, height - margin - 50)
-  text(RES, width - margin, height - margin - 25)
+  text(FILE, width - margin, height - margin - 25);
   text('offset: ' + str(OFFSET), width - margin, height - margin);
 
   // draw now marker
