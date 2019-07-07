@@ -43,7 +43,7 @@ function setup() {
   add_frame_button = createButton('Add Frame');
   add_frame_button.position(10, 100);
   add_frame_button.touchStarted(createFrame);
-  delete_frame_button.mousePressed(deleteFrame);
+  delete_frame_button.mousePressed(createFrame);
   add_frame_button.addClass('button')
 
   c.drop(gotFile); // dropfile event triggers callback
