@@ -9,5 +9,8 @@ def test_data_loggedin(client, auth):
 
 def test_data_post(client, auth):
     auth.login()
-    res = client.post('data/frames', data='data').data
-    assert b'data' in res
+    post_data = 'data'
+    res = client.post('data/frames', data=post_data).data
+    assert post_data in res.decode()
+    res = client.get('data/frames').data
+    assert post_data in res.decode()
