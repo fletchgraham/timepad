@@ -26,8 +26,8 @@ let RES;
 
 function setup() {
   OFFSET = now();
-  const c = createCanvas(windowWidth,windowHeight);
   background(24);
+  const c = createCanvas(windowWidth,windowHeight);
 
   // add frame button
   add_frame_button = createButton('Add Frame');
@@ -41,6 +41,7 @@ function setup() {
   timeline = new Timeline();
 
   RES = 'Response';
+  loadFrames();
 }
 
 function draw() {
@@ -148,6 +149,22 @@ function createFrame() {
   FRAMES.push(new_frame);
   httpPost('/data/frames', JSON.stringify(FRAMES), function(result) {
     RES = str(result);
+    redraw();
+  });
+}
+
+function loadFrames() {
+  httpGet('data/frames', function(response) {
+    json_response = JSON.parse(str(response));
+    FRAMES = [];
+    for (j in json_response) {
+      new_frame = new Frame(json_response[j].start);
+      new_frame.stop = json_response[j].stop;
+      new_frame.project = json_response[j].project;
+      new_frame.selected = false;
+      FRAMES.push(new_frame);
+      console.log('created frame from json.')
+    }
     redraw();
   });
 }

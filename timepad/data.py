@@ -1,3 +1,4 @@
+import json
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
@@ -19,4 +20,4 @@ def register():
 
     db = get_db()
     frames = db.execute('select * from timeline where author_id=?', (user_id,)).fetchone()['frames']
-    return str(frames)
+    return frames
