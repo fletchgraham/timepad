@@ -20,6 +20,8 @@ var MODE = 'PAN';
 let add_frame_button;
 let RES;
 
+let BUTTON_PRESSED = false;
+
 
 //////////////////////////////////////////////////////////////////////////////
 // Setup and Draww
@@ -59,14 +61,18 @@ function draw() {
 // Events
 
 function windowResized() {
-
   resizeCanvas(windowWidth, windowHeight);
   redraw();
 }
 
 function touchStarted() {
-  timeline.touched();
-  redraw();
+  if (BUTTON_PRESSED == true) {
+    BUTTON_PRESSED = false;
+  } else {
+    framesTouch();
+    timeline.touched();
+    redraw();
+  }
 }
 
 function touchMoved() {
@@ -130,10 +136,28 @@ class Frame {
     this.selected = true;
   }
 
+  over() {
+    var x = mouseX;
+    var y = mouseY;
+    var x1 = 50;
+    var x2 = width - 50;
+    var y1 = toPixels(this.stop);
+    var y2 = toPixels(this.start);
+
+    if (x1 < x && x < x2 && y1 < y && y < y2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   render() {
     // frame rect
     rectMode(CORNERS);
     stroke(0, 0 , 255);
+    if (this.selected == true) {
+      stroke(255);
+    }
     fill(0,0,100);
     rect(50, toPixels(this.stop), width - 50, toPixels(this.start), 10);
 
@@ -145,12 +169,30 @@ class Frame {
 }
 
 function createFrame() {
+  BUTTON_PRESSED = true;
+  for (f in FRAMES) {
+    FRAMES[f].selected = false;
+  }
   new_frame = new Frame(toSeconds(height / 2));
   FRAMES.push(new_frame);
   httpPost('/data/frames', JSON.stringify(FRAMES), function(result) {
     RES = str(result);
     redraw();
   });
+}
+
+function framesTouch() {
+  for (f in FRAMES) {
+    FRAMES[f].selected = false;
+  }
+  // reverse loop so the top ones are seleced first
+  for (var i = FRAMES.length; i--;) {
+    var frame = FRAMES[i];
+    if (frame.over()) {
+      frame.selected = true;
+      return true;
+    }
+  }
 }
 
 function loadFrames() {
