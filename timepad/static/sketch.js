@@ -15,8 +15,10 @@ let FILE = '';
 let FRAMES = [];
 
 // modes
-
 var MODE = 'PAN';
+
+let add_frame_button;
+
 
 //////////////////////////////////////////////////////////////////////////////
 // Setup and Draww
@@ -27,9 +29,10 @@ function setup() {
   background(24);
 
   // add frame button
-  button = createButton('Add Frame');
-  button.position(10, 45);
-  button.mousePressed(createFrame);
+  add_frame_button = createButton('Add Frame');
+  add_frame_button.position(10, 45);
+  add_frame_button.mousePressed(createFrame);
+  add_frame_button.addClass('button')
 
   c.drop(gotFile); // dropfile event triggers callback
 

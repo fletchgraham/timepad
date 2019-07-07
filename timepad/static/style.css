@@ -107,3 +107,17 @@ nav {
   input:focus {
     outline: 0;
   }
+
+  /* bc my imput styles are ignored by p5*/
+  .button {
+    -webkit-appearance: none;
+    border: 1px solid white;
+    border-radius: 50;
+    background: #181818;
+    color: white;
+    padding: 1em;
+  }
+
+  .button:focus {
+    outline: 0;
+  }
