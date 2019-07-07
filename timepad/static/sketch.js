@@ -36,12 +36,14 @@ function setup() {
   delete_frame_button.style('color', 'red')
   delete_frame_button.position(10, 45);
   delete_frame_button.touchStarted(deleteFrame);
+  delete_frame_button.mousePressed(deleteFrame);
   delete_frame_button.addClass('button')
   
   // add frame button
   add_frame_button = createButton('Add Frame');
   add_frame_button.position(10, 100);
   add_frame_button.touchStarted(createFrame);
+  delete_frame_button.mousePressed(deleteFrame);
   add_frame_button.addClass('button')
 
   c.drop(gotFile); // dropfile event triggers callback
