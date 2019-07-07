@@ -43,6 +43,7 @@ function draw() {
   for (f in FRAMES) {
     FRAMES[f].render();
   }
+  drawCrosshair();
   drawDebug();
   noLoop();
 }
@@ -137,7 +138,7 @@ class Frame {
 }
 
 function createFrame() {
-  new_frame = new Frame(toSeconds(height / 2 + 50));
+  new_frame = new Frame(toSeconds(height / 2));
   FRAMES.push(new_frame);
 }
 
@@ -163,6 +164,15 @@ function toPixels(seconds) {
 //////////////////////////////////////////////////////////////////////////////
 // Debug Info
 
+function drawCrosshair() {
+  var size = 15;
+  stroke(255);
+  var mid = height/2;
+  line(width/2 - size, mid, width/2 + size, mid);
+  mid = width/2;
+  line(mid, height/2 - size, mid, height/2 + size)
+}
+
 function drawDebug() {
   // font settings
   fill(255);
@@ -176,7 +186,7 @@ function drawDebug() {
   text('offset: ' + str(OFFSET), width - margin, height - margin);
 
   // draw now marker
-  text('<<<<<<< NOW >>>>>>>', width - margin, toPixels(now()));
+  text('<< NOW', width - margin, toPixels(now()));
 
   textAlign(LEFT);
 
