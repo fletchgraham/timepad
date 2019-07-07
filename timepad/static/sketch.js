@@ -148,6 +148,7 @@ function createFrame() {
   FRAMES.push(new_frame);
   httpPost('/data/frames', JSON.stringify(FRAMES), function(result) {
     RES = str(result);
+    redraw();
   });
 }
 
