@@ -18,6 +18,7 @@ let FRAMES = [];
 var MODE = 'PAN';
 
 let add_frame_button;
+let RES;
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -38,6 +39,8 @@ function setup() {
 
   // init ui elements
   timeline = new Timeline();
+
+  RES = 'Response';
 }
 
 function draw() {
@@ -143,6 +146,9 @@ class Frame {
 function createFrame() {
   new_frame = new Frame(toSeconds(height / 2));
   FRAMES.push(new_frame);
+  httpPost('/data/frames', JSON.stringify(FRAMES), function(result) {
+    RES = str(result);
+  });
 }
 
 
@@ -185,7 +191,8 @@ function drawDebug() {
   margin = 10;
 
   // test dropfile text
-  text(FILE, width - margin, height - margin - 25)
+  text(FILE, width - margin, height - margin - 50)
+  text(RES, width - margin, height - margin - 25)
   text('offset: ' + str(OFFSET), width - margin, height - margin);
 
   // draw now marker
