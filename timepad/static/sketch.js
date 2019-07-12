@@ -20,6 +20,7 @@ var CONTEXT;
 let timeline;
 var del_btn;
 var start_btn;
+var now_btn;
 
 // style
 var BACKGROUND = 24;
@@ -30,8 +31,7 @@ var BACKGROUND = 24;
 
 function setup() {
   frameRate(1);
-  OFFSET = now();
-  LAST_OFFSET = 0;
+  reset_offset();
   CONTEXT = 'SCRUB';
   createCanvas(windowWidth,windowHeight);
 
@@ -42,6 +42,9 @@ function setup() {
   
   start_btn = select('#start_btn');
   start_btn.mousePressed(start_btn_callback);
+
+  now_btn = select('#now_btn');
+  now_btn.mousePressed(jumpt_to_now);
 
   timeline = new Timeline();
 
@@ -81,6 +84,12 @@ function stop_btn_callback() {
   start_btn.html('Start')
   start_btn.style('background', '#181818');
   start_btn.mousePressed(start_btn_callback);
+}
+
+function jumpt_to_now() {
+  CONTEXT = 'BTN_PRESSED';
+  reset_offset();
+  redraw();
 }
 
 
