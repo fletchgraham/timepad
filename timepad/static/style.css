@@ -130,6 +130,16 @@ button:focus {
 }
 
 #edit_frame_form {
+  border:1px solid white;
+  border-radius:10px;
+  background: #181818;
+  position: fixed;
+  left:7%;
+  right:7%;
+  top:7%;
+  bottom:7%;
+  padding:1em;
   display: none;
+  flex-direction: column;
 }
 

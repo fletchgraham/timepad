@@ -21,6 +21,7 @@ let timeline;
 var del_btn;
 var start_btn;
 var now_btn;
+var done_btn;
 
 // style
 var BACKGROUND = 24;
@@ -45,6 +46,12 @@ function setup() {
 
   now_btn = select('#now_btn');
   now_btn.mousePressed(jumpt_to_now);
+
+  edit_btn = select('#edit_btn');
+  edit_btn.mousePressed(edit_btn_callback);
+
+  done_btn = select('#done_edit_btn');
+  done_btn.mousePressed(done_edit_callback);
 
   timeline = new Timeline();
 
@@ -92,6 +99,18 @@ function jumpt_to_now() {
   redraw();
 }
 
+function edit_btn_callback() {
+  CONTEXT = 'EDITING';
+  var form = select('#edit_frame_form');
+  //form.center();
+  form.style('display', 'flex');
+}
+
+function done_edit_callback() {
+  CONTEXT = 'SCRUB';
+  var form = select('#edit_frame_form');
+  form.hide();
+}
 
 function delete_btn_callback() {
   CONTEXT = 'BTN_PRESSED';
@@ -107,7 +126,7 @@ function windowResized() {
 }
 
 function touchStarted() {
-  if (CONTEXT == 'BTN_PRESSED') {
+  if (CONTEXT != 'SCRUB') {
     return;
   } else {
     framesTouch();
