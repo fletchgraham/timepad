@@ -23,7 +23,6 @@ function renderDebug() {
     margin = 10;
 
     // debug redouts
-    text(FILE, width - margin, height - margin - 50);
     text('context: ' + CONTEXT, width - margin, height - margin - 25);
     text('offset: ' + str(OFFSET), width - margin, height - margin);
 
@@ -40,7 +39,8 @@ function renderDebug() {
 function renderFrame(frame) {
     // frame rect
     rectMode(CORNERS);
-    stroke(0, 0 , 255)
+    stroke(0, 0 , 255);
+    strokeWeight(2);
     if (frame.selected == true) {
         stroke(255);
     }
@@ -66,6 +66,7 @@ function renderTimeline() {
         stroke(50);
         fill(50);
         line(0, i, width, i);
+        noStroke();
         textSize(12);
         text(str(toSeconds(i)), 10, i);
       }

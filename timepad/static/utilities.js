@@ -1,3 +1,5 @@
+// Utilitie functions //
+
 function sync() {
     var response;
     httpPost('/data/frames', JSON.stringify(FRAMES), function(result) {

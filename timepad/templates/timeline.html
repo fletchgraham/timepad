@@ -8,3 +8,18 @@
     <script src="{{ url_for('static', filename='sketch.js') }}"></script>
 {% endblock %}
 
+{% block content %}
+<div id="toolbar">
+    <button id="start_btn">Start</button>
+    <button id="now_btn">Now</button>
+    <button id="edit_btn">Edit</button>
+    <button id="delete_btn">Delete</button>
+</div>
+
+<div id="edit_frame_form" class="modal">
+    <input type="text" name="project"></input>
+    <input type="text" name="project"></input>
+    <input type="text" name="project"></input>
+    <input type="text" name="project"></input>
+</div>
+{% endblock %}

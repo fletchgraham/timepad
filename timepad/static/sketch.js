@@ -12,17 +12,17 @@ var DOWN_Y = 0;
 var DELTA_Y = 0;
 var START = 0;
 
-// dropfile indicator
-let FILE = '';
-
 // model
 let FRAMES = [];
 
 // ui
 var CONTEXT;
-let start_btn;
-let delete_btn;
 let timeline;
+var del_btn;
+var start_btn;
+
+// style
+var BACKGROUND = 24;
 
 
 //////////////////////////////////////////////////////////////////////////////
@@ -33,22 +33,15 @@ function setup() {
   OFFSET = now();
   LAST_OFFSET = 0;
   CONTEXT = 'SCRUB';
-  const c = createCanvas(windowWidth,windowHeight);
-  c.drop(gotFile); // dropfile event triggers callback
+  createCanvas(windowWidth,windowHeight);
 
-  // delet frame button
-  delete_btn = createButton('Delete Frame');
-  delete_btn.style('color', 'red')
-  delete_btn.position(10, 45);
-  delete_btn.mousePressed(delete_btn_callback);
-  delete_btn.touchStarted(delete_btn_callback);
-  delete_btn.addClass('button')
+  del_btn = select('#delete_btn');
+  del_btn.style('color', 'red');
+  del_btn.mousePressed(delete_btn_callback);
+  del_btn.touchStarted(delete_btn_callback);
   
-  // add frame button
-  start_btn = createButton('Start / Stop');
-  start_btn.position(10, 100);
+  start_btn = select('#start_btn');
   start_btn.mousePressed(start_btn_callback);
-  start_btn.addClass('button')
 
   timeline = new Timeline();
 
@@ -77,12 +70,16 @@ function draw() {
 function start_btn_callback() {
   CONTEXT = 'BTN_PRESSED';
   startFrame();
+  start_btn.html('Stop')
+  start_btn.style('background', 'red');
   start_btn.mousePressed(stop_btn_callback);
 }
 
 function stop_btn_callback() {
   CONTEXT = 'BTN_PRESSED';
   stopFrame();
+  start_btn.html('Start')
+  start_btn.style('background', '#181818');
   start_btn.mousePressed(start_btn_callback);
 }
 
@@ -122,11 +119,6 @@ function touchMoved() {
     redraw();
     return false;
   }
-}
-
-function gotFile(file) {
-  FILE = 'You dropped a file! Good Job!';
-  redraw();
 }
 
 //////////////////////////////////////////////////////////////////////////////
