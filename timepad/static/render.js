@@ -78,8 +78,8 @@ function drawTimeline() {
 // Sky
 
 function drawSky() {
-  var horizon = color(224, 204, 189);
-  var zenith = color(24, 57, 90);
+  var horizon = color(234, 214, 199);
+  var zenith = color(24, 57, 120);
   var r = height*1.6; // pythagorus helps cover the screen
   drawGradient(horizon, zenith);
 }
