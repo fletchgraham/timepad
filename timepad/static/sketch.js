@@ -220,7 +220,11 @@ function stopFrame() {
   for (f in FRAMES) {
     frame = FRAMES[f];
     if (frame.recording == true) {
+      if (frame.stop - frame.start < 60) {
+        FRAMES.splice(f, 1);
+      } else {
       frame.recording = false;
+    }
     }
   }
   sync();
