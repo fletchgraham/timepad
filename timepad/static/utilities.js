@@ -8,7 +8,7 @@ function sync() {
     });
     return response;
 }
-  
+
 function now() {
   n = Math.round(new Date() / 1000);
   return n;

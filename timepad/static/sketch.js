@@ -23,12 +23,11 @@ var start_btn;
 var now_btn;
 var done_btn;
 
-// style
-var BACKGROUND = 24;
-
 
 //////////////////////////////////////////////////////////////////////////////
 // Setup and Draww
+
+p5.disableFriendlyErrors = true; // disables FES for performance
 
 function setup() {
   frameRate(1);
@@ -40,7 +39,7 @@ function setup() {
   del_btn.style('color', 'red');
   del_btn.mousePressed(delete_btn_callback);
   del_btn.touchStarted(delete_btn_callback);
-  
+
   start_btn = select('#start_btn');
   start_btn.mousePressed(start_btn_callback);
 
@@ -61,16 +60,17 @@ function setup() {
 function draw() {
   OFFSET = LAST_OFFSET + now();
   background(24);
-  renderTimeline();
+  drawSky();
+  drawTimeline();
   for (f in FRAMES) {
     frame = FRAMES[f];
     if (frame.recording == true) {
       frame.stop = OFFSET;
     }
-    renderFrame(frame);
+    drawFrame(frame);
   }
-  renderCrosshair();
-  renderDebug();
+  drawCrosshair();
+  drawDebug();
   //noLoop();
 }
 
@@ -261,5 +261,3 @@ function loadFrames() {
     redraw();
   });
 }
-
-
