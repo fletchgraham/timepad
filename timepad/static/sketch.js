@@ -72,6 +72,9 @@ function draw() {
   }
   drawCrosshair();
   drawDebug();
+  for (let touch of touches) {
+    ellipse(touch.x, touch.y, 100);
+  }
   //noLoop();
 }
 
