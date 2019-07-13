@@ -39,16 +39,17 @@ function drawDebug() {
 function drawFrame(frame) {
     // frame rect
     rectMode(CORNERS);
-    stroke(0, 0 , 255);
-    strokeWeight(2);
+    stroke(255);
+    strokeWeight(1);
+    fill(255, 100);
     if (frame.selected == true) {
         stroke(255);
+        fill(255, 200);
     }
-    fill(0,0,100);
     if (frame.recording == true) {
         noFill();
     }
-    rect(50, toPixels(frame.stop), width - 50, toPixels(frame.start), 10);
+    rect(50, toPixels(frame.stop), width - 50, toPixels(frame.start), 5);
 
     // frame info
     noStroke();
@@ -63,8 +64,8 @@ function drawFrame(frame) {
 function drawTimeline() {
     for (var i = 0; i < height; i++) {
       if ((toSeconds(i)) % 100 == 0) {
-        stroke(255);
-        fill(255);
+        stroke(255, 20);
+        fill(255, 20);
         line(0, i, width, i);
         noStroke();
         textSize(12);

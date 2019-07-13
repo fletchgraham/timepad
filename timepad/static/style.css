@@ -1,7 +1,8 @@
 html {
     color: white;
     background-color: #181818;
-    font-family: Helvetica, sans-serif;
+    font-family: sans-serif;
+    font-weight: 100;
   }
 
 body {
@@ -9,6 +10,10 @@ body {
     margin: 0;
     overflow: hidden;
     overscroll-behavior: none;
+}
+
+h1, h2, h3, h4, h5 p {
+  font-weight: 100;
 }
 
 a {
@@ -19,8 +24,10 @@ nav {
     display: flex;
     align-items: center;
     padding: 0 0.5rem;
+    border:1px solid white;
+    margin: 10px;
   }
-  
+
 nav h1 {
   flex: auto;
   margin: 0;
@@ -110,9 +117,9 @@ input:focus {
 button {
   -webkit-appearance: none;
   border:1px solid white;
-  border-radius:10px;
+  border-radius:1px;
   margin-bottom: 5px;
-  background:#181818;
+  background:none;
   color: white;
   padding: 1em;
   display: block;
@@ -121,10 +128,6 @@ button {
 
 button:focus {
   outline: 0;
-}
-
-button:active {
-  background:grey;
 }
 
 #toolbar {
@@ -136,7 +139,7 @@ button:active {
 #edit_frame_form {
   border:1px solid white;
   border-radius:10px;
-  background: #181818;
+  background: none;
   position: fixed;
   left:7%;
   right:7%;
@@ -146,4 +149,3 @@ button:active {
   display: none;
   flex-direction: column;
 }
-

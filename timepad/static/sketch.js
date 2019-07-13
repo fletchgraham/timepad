@@ -33,10 +33,11 @@ function setup() {
   frameRate(1);
   reset_offset();
   CONTEXT = 'SCRUB';
+  strokeJoin(ROUND);
+  strokeCap(ROUND);
   createCanvas(windowWidth,windowHeight);
 
   del_btn = select('#delete_btn');
-  del_btn.style('color', 'red');
   del_btn.mousePressed(delete_btn_callback);
   del_btn.touchStarted(delete_btn_callback);
 
@@ -89,7 +90,7 @@ function stop_btn_callback() {
   CONTEXT = 'BTN_PRESSED';
   stopFrame();
   start_btn.html('Start')
-  start_btn.style('background', '#181818');
+  start_btn.style('background', 'none');
   start_btn.mousePressed(start_btn_callback);
 }
 
