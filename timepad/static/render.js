@@ -1,6 +1,5 @@
 // Functions that draw things. Organized top to bottom //
 
-//var 255 = color(255, 255, 255);
 //////////////////////////////////////////////////////////////////////////////
 // Heads up display (overlays)
 
