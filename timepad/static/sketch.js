@@ -150,6 +150,13 @@ function touchMoved() {
   }
 }
 
+function mouseWheel(event) {
+  print(event.delta);
+  ZOOM = constrain(ZOOM + event.delta / 100, .5, 100);
+  redraw();
+  //return false;
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // Timeline
 
