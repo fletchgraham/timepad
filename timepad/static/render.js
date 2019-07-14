@@ -62,17 +62,24 @@ function drawFrame(frame) {
 
 /** Draw the ruled, calendar-like background of the app */
 function drawTimeline() {
-    for (var i = 0; i < height; i++) {
-      if ((toSeconds(i)) % 100 == 0) {
-        stroke(255, 20);
-        fill(255, 20);
-        line(0, i, width, i);
-        noStroke();
-        textSize(12);
-        text(str(toSeconds(i)), 10, i);
-      }
-    }
+  var top_date = new Date(toSeconds(0) * 1000);
+  var bottom_millis = toSeconds(height) * 1000;
+  draw_time = roundToHour(top_date);
+  for (var i = draw_time.getTime(); i > bottom_millis; i -= (60 * 60 * 1000)) {
+    draw_time.setTime(i);
+    px = toPixels(draw_time.getTime() / 1000);
+
+    // hour lines
+    stroke(255, 50);
+    fill(255, 50);
+    line(0, px, width, px);
+
+    // hour labels
+    noStroke();
+    textSize(12);
+    text(str(draw_time), 10, px);
   }
+}
 
 //////////////////////////////////////////////////////////////////////////////
 // Sky

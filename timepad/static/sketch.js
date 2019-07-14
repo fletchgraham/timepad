@@ -5,7 +5,7 @@
 // view transforms
 var LAST_OFFSET = 0;
 var OFFSET = 0;
-var ZOOM = 1;
+var ZOOM = 100;
 
 // for calculating drag deltas
 var DOWN_Y = 0;
@@ -154,8 +154,8 @@ function touchMoved() {
 }
 
 function mouseWheel(event) {
-  print(event.delta);
-  ZOOM = constrain(ZOOM + event.delta / 100, .5, 100);
+  console.log(ZOOM);
+  ZOOM = constrain(ZOOM + event.delta / 100, 10, 300);
   redraw();
   //return false;
 }

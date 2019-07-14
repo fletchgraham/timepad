@@ -14,6 +14,11 @@ function now() {
   return n;
 }
 
+function roundToHour(date) {
+  p = 60 * 60 * 1000; // milliseconds in an hour
+  return new Date(Math.round(date.getTime() / p ) * p);
+}
+
 function toSeconds(pixels) {
   secs = Math.round(-(pixels - height/2) * ZOOM + OFFSET);
   return secs;
