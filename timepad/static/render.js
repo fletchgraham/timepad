@@ -68,10 +68,11 @@ function drawTimeline() {
   for (var i = draw_time.getTime(); i > bottom_millis; i -= (60 * 60 * 1000)) {
     draw_time.setTime(i);
     px = toPixels(draw_time.getTime() / 1000);
+    opacity = px / height * 80;
 
     // hour lines
-    stroke(255, 50);
-    fill(255, 50);
+    stroke(255, opacity);
+    fill(255, opacity);
     line(0, px, width, px);
 
     // hour labels

@@ -154,7 +154,7 @@ function touchMoved() {
 }
 
 function mouseWheel(event) {
-  console.log(ZOOM);
+  //console.log(ZOOM);
   ZOOM = constrain(ZOOM + event.delta / 100, 10, 300);
   redraw();
   //return false;
