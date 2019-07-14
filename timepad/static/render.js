@@ -54,6 +54,7 @@ function drawFrame(frame) {
     // frame info
     noStroke();
     fill(255);
+    textSize(12);
     text(frame.project, 60, toPixels(frame.start)-10)
 }
 
@@ -70,15 +71,26 @@ function drawTimeline() {
     px = toPixels(draw_time.getTime() / 1000);
     opacity = px / height * 80;
 
-    // hour lines
     stroke(255, opacity);
     fill(255, opacity);
-    line(0, px, width, px);
 
-    // hour labels
-    noStroke();
-    textSize(12);
-    text(str(draw_time), 10, px);
+    if (draw_time.getHours() == 0) {
+      strokeWeight(5);
+      line(0, px, width, px);
+      noStroke();
+      textSize(18);
+      text(str(draw_time), 10, px - 5);
+    } else if (ZOOM < 200) {
+
+      // hour lines
+      strokeWeight(1);
+      line(0, px, width, px);
+
+      // hour labels
+      noStroke();
+      textSize(12);
+      text(str(draw_time), 10, px);
+    }
   }
 }
 
