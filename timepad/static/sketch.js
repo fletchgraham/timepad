@@ -197,8 +197,8 @@ class Frame {
 function overFrame(frame) {
   var x = mouseX;
   var y = mouseY;
-  var x1 = 50;
-  var x2 = width - 50;
+  var x1 = width/4;
+  var x2 = width - width/4;
   var y1 = toPixels(frame.stop);
   var y2 = toPixels(frame.start);
 

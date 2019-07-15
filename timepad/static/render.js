@@ -72,8 +72,9 @@ function drawFrame(frame) {
     // frame rect
     rectMode(CORNERS);
     stroke(255);
-    strokeWeight(1);
+    strokeWeight(2);
     fill(255, 100);
+    var margin = width/4;
     if (frame.selected == true) {
         stroke(255);
         fill(255, 200);
@@ -81,13 +82,13 @@ function drawFrame(frame) {
     if (frame.recording == true) {
         noFill();
     }
-    rect(50, toPixels(frame.stop), width - 50, toPixels(frame.start), 5);
+    rect(margin, toPixels(frame.stop), width - margin, toPixels(frame.start));
 
     // frame info
     noStroke();
     fill(255);
     textSize(12);
-    text(frame.project, 60, toPixels(frame.start)-10)
+    text(frame.project, margin + 10, toPixels(frame.start)-10)
 }
 
 //////////////////////////////////////////////////////////////////////////////
