@@ -24,8 +24,6 @@ nav {
     display: flex;
     align-items: center;
     padding: 0 0.5rem;
-    border:1px solid white;
-    margin: 10px;
   }
 
 nav h1 {
@@ -103,8 +101,7 @@ input[type=submit] {
 input {
   -webkit-appearance: none;
   border: 1px solid white;
-  border-radius:10px;
-  background: #181818;
+  background: none;
   color: white;
   padding: 1em;
 }
@@ -117,13 +114,12 @@ input:focus {
 button {
   -webkit-appearance: none;
   border:1px solid white;
-  border-radius:1px;
-  margin-bottom: 5px;
   background:none;
   color: white;
-  padding: 1em;
+  padding: 1.5em;
   display: block;
   width: 100%;
+  margin: none;
 }
 
 button:focus {
@@ -133,19 +129,19 @@ button:focus {
 #toolbar {
   align-content: right;
   position: fixed;
-  left: 10px;
+  border:1px solid white;
+  right: 10px;
+  top: 100px;
 }
 
 #edit_frame_form {
   border:1px solid white;
-  border-radius:10px;
   background: none;
   position: fixed;
   left:7%;
   right:7%;
   top:7%;
   bottom:7%;
-  padding:1em;
   display: none;
   flex-direction: column;
 }
