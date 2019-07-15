@@ -5,13 +5,19 @@
 
 /** Draw the crosshair in the middle of the window. */
 function drawCrosshair() {
-    var size = 15;
-    stroke(255);
-    var mid = height/2;
-    line(width/2 - size, mid, width/2 + size, mid);
-    mid = width/2;
-    line(mid, height/2 - size, mid, height/2 + size);
-  }
+  var centerX = width/2;
+  var centerY = height/2;
+  var size = 50;
+  var focus = 3; // how far in do the hairs reach
+  stroke(255);
+  strokeWeight(2)
+  noFill()
+  circle(centerX, centerY, size);
+  line(centerX - size/2, centerY, centerX - size/focus, centerY);
+  line(centerX + size/focus, centerY, centerX + size/2, centerY);
+  line(centerX, centerY - size/2, centerX, centerY - size/focus);
+  line(centerX, centerY + size/focus, centerX, centerY + size/2);
+}
 
 /** Draw helpful, yet perhaps impermanent info. */
 function drawDebug() {
