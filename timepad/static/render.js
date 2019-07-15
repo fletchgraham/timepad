@@ -102,13 +102,13 @@ function drawTimeline() {
   for (var i = draw_time.getTime(); i > bottom_millis; i -= (60 * 60 * 1000)) {
     draw_time.setTime(i);
     px = toPixels(draw_time.getTime() / 1000);
-    opacity = px / height * 80;
+    opacity = px / height * 100;
 
     stroke(255, opacity);
     fill(255, opacity);
 
     if (draw_time.getHours() == 0) {
-      strokeWeight(5);
+      strokeWeight(2);
       line(0, px, width, px);
       noStroke();
       textSize(18);
@@ -116,13 +116,15 @@ function drawTimeline() {
     } else if (ZOOM < 200) {
 
       // hour lines
-      strokeWeight(1);
-      line(0, px, width, px);
+      textAlign(LEFT, BOTTOM);
+      strokeWeight(2);
+      line(10, px, width/2, px);
 
       // hour labels
+
       noStroke();
       textSize(12);
-      text(str(draw_time), 10, px);
+      text(str(draw_time.getHours()), 50, px);
     }
   }
 }
