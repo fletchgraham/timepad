@@ -49,15 +49,15 @@ function setup() {
   fg = FOREGROUND.toString();
   select('html').style('color', fg);
   select('a').style('color', fg);
-  select('#toolbar').style('border', '1px solid ' + fg);
   for(let b of selectAll('button')) {
-    b.style('border', '1px solid ' + fg);
+    b.style('border', '2px solid ' + fg);
     b.style('color', fg);
   }
   createCanvas(windowWidth,windowHeight);
 
   // buttons
   del_btn = select('#delete_btn');
+  del_btn.hide();
   del_btn.mousePressed(delete_btn_callback);
   del_btn.touchStarted(delete_btn_callback);
 
@@ -68,6 +68,7 @@ function setup() {
   now_btn.mousePressed(jumpt_to_now);
 
   edit_btn = select('#edit_btn');
+  edit_btn.hide();
   edit_btn.mousePressed(edit_btn_callback);
 
   done_btn = select('#done_edit_btn');
@@ -98,12 +99,13 @@ function draw() {
 
     drawNow();
     drawCrosshair();
-    drawDebug();
 
     for (let touch of touches) {
       ellipse(touch.x, touch.y, 100);
     }
   }
+
+  drawDebug();
 
 }
 
@@ -114,7 +116,7 @@ function start_btn_callback() {
   BUTTON_PRESSED = true;
   startFrame();
   start_btn.html('Stop')
-  start_btn.style('background', 'red');
+  start_btn.style('background', FOREGROUND_ALPHA);
   start_btn.mousePressed(stop_btn_callback);
 }
 
@@ -143,10 +145,12 @@ function edit_btn_callback() {
 }
 
 function done_edit_callback() {
+  BUTTON_PRESSED = true;
   CONTEXT = 'TIMELINE';
   var form = select('#edit_frame_form');
   form.hide();
   select('#toolbar').show();
+  return false;
 }
 
 function delete_btn_callback() {
@@ -177,7 +181,7 @@ function touchEnded() {
 }
 
 function touchMoved() {
-  if (CONTEXT == 'BTN_PRESSED') {
+  if (BUTTON_PRESSED == true) {
     return false;
   } else {
     timeline.dragged();
@@ -276,6 +280,8 @@ function stopFrame() {
 }
 
 function deselectFrames() {
+  edit_btn.hide();
+  del_btn.hide();
   for (f in FRAMES) {
     FRAMES[f].selected = false;
   }
@@ -283,14 +289,14 @@ function deselectFrames() {
 
 /** Leave only the frame that's directly under the cursor selected. */
 function framesTouch() {
-  for (f in FRAMES) {
-    FRAMES[f].selected = false;
-  }
+  deselectFrames();
   // reverse loop so the top ones are seleced first
   for (var i = FRAMES.length; i--;) {
     var frame = FRAMES[i];
     if (overFrame(frame)) {
       frame.selected = true;
+      edit_btn.show();
+      del_btn.show();
       return true;
     }
   }
