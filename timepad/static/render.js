@@ -130,7 +130,7 @@ function drawTimeline() {
 
       noStroke();
       textSize(12);
-      text(str(draw_time.getHours()), 50, px);
+      text(str(draw_time.getHours()), 105, px);
     }
   }
 }
