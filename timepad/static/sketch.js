@@ -17,6 +17,8 @@ let FRAMES = [];
 
 // ui
 var CONTEXT;
+var BUTTON_PRESSED;
+var FOREGROUND;
 let timeline;
 var del_btn;
 var start_btn;
@@ -32,7 +34,8 @@ p5.disableFriendlyErrors = true; // disables FES for performance
 function setup() {
   frameRate(1);
   reset_offset();
-  CONTEXT = 'SCRUB';
+  CONTEXT = 'TIMELINE';
+  BUTTON_PRESSED = false;
   strokeJoin(ROUND);
   strokeCap(ROUND);
   createCanvas(windowWidth,windowHeight);
@@ -60,29 +63,38 @@ function setup() {
 
 function draw() {
   OFFSET = LAST_OFFSET + now();
+
   background(24);
   drawSky();
-  drawTimeline();
-  for (f in FRAMES) {
-    frame = FRAMES[f];
-    if (frame.recording == true) {
-      frame.stop = OFFSET;
+
+  if (CONTEXT == 'TIMELINE') {
+    drawTimeline();
+
+    // draw frames
+    for (f in FRAMES) {
+      frame = FRAMES[f];
+      if (frame.recording == true) {
+        frame.stop = OFFSET;
+      }
+      drawFrame(frame);
     }
-    drawFrame(frame);
+
+    drawNow();
+    drawCrosshair();
+    drawDebug();
+
+    for (let touch of touches) {
+      ellipse(touch.x, touch.y, 100);
+    }
   }
-  drawCrosshair();
-  drawDebug();
-  for (let touch of touches) {
-    ellipse(touch.x, touch.y, 100);
-  }
-  //noLoop();
+
 }
 
 //////////////////////////////////////////////////////////////////////////////
 // Button Callbacks
 
 function start_btn_callback() {
-  CONTEXT = 'BTN_PRESSED';
+  BUTTON_PRESSED = true;
   startFrame();
   start_btn.html('Stop')
   start_btn.style('background', 'red');
@@ -90,7 +102,7 @@ function start_btn_callback() {
 }
 
 function stop_btn_callback() {
-  CONTEXT = 'BTN_PRESSED';
+  BUTTON_PRESSED = true;
   stopFrame();
   start_btn.html('Start')
   start_btn.style('background', 'none');
@@ -98,26 +110,30 @@ function stop_btn_callback() {
 }
 
 function jumpt_to_now() {
-  CONTEXT = 'BTN_PRESSED';
+  BUTTON_PRESSED = true;
   reset_offset();
   redraw();
 }
 
 function edit_btn_callback() {
-  CONTEXT = 'EDITING';
+  BUTTON_PRESSED = true;
+  CONTEXT = 'EDITING'
   var form = select('#edit_frame_form');
+  select('#toolbar').hide();
   //form.center();
   form.style('display', 'flex');
+  redraw();
 }
 
 function done_edit_callback() {
-  CONTEXT = 'SCRUB';
+  CONTEXT = 'TIMELINE';
   var form = select('#edit_frame_form');
   form.hide();
+  select('#toolbar').show();
 }
 
 function delete_btn_callback() {
-  CONTEXT = 'BTN_PRESSED';
+  BUTTON_PRESSED = true;
   deleteFrame();
 }
 
@@ -130,7 +146,7 @@ function windowResized() {
 }
 
 function touchStarted() {
-  if (CONTEXT != 'SCRUB') {
+  if (CONTEXT != 'TIMELINE') {
     return;
   } else {
     framesTouch();
@@ -140,7 +156,7 @@ function touchStarted() {
 }
 
 function touchEnded() {
-  CONTEXT = 'SCRUB';
+  BUTTON_PRESSED = false;
 }
 
 function touchMoved() {
