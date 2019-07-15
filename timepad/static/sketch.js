@@ -155,7 +155,8 @@ function touchMoved() {
 
 function mouseWheel(event) {
   //console.log(ZOOM);
-  ZOOM = constrain(ZOOM + event.delta / 100, 10, 300);
+  var dampening = 1 / (1000 / ZOOM);
+  ZOOM = constrain(ZOOM + event.delta * dampening, 10, 1000);
   redraw();
   //return false;
 }
