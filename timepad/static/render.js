@@ -9,7 +9,7 @@ function drawCrosshair() {
   var centerY = height/2;
   var size = 50;
   var focus = 3; // how far in do the hairs reach
-  stroke(255);
+  stroke(FOREGROUND);
   strokeWeight(2)
   noFill()
   circle(centerX, centerY, size);
@@ -22,7 +22,7 @@ function drawCrosshair() {
 /** Draw helpful, yet perhaps impermanent info. */
 function drawDebug() {
     // font settings
-    fill(255);
+    fill(FOREGROUND);
     textSize(16);
     noStroke();
     textAlign(RIGHT);
@@ -42,7 +42,7 @@ function drawNow() {
   var x = w + 10; // x point of flag
 
   noFill();
-  stroke(255);
+  stroke(FOREGROUND);
   strokeWeight(2);
 
   // verticies of the flag
@@ -56,7 +56,7 @@ function drawNow() {
   vertex(width/2 - 40, n);
   endShape();
 
-  fill(255);
+  fill(FOREGROUND);
   textSize(18);
   noStroke();
   textAlign(CENTER, CENTER);
@@ -71,13 +71,16 @@ function drawNow() {
 function drawFrame(frame) {
     // frame rect
     rectMode(CORNERS);
-    stroke(255);
+    stroke(FOREGROUND);
     strokeWeight(2);
-    fill(255, 100);
+    var f = color(FOREGROUND.toString());
+    f.setAlpha(100);
+    fill(f);
     var margin = width/4;
     if (frame.selected == true) {
-        stroke(255);
-        fill(255, 200);
+        stroke(FOREGROUND);
+        f.setAlpha(200);
+        fill(f);
     }
     if (frame.recording == true) {
         noFill();
@@ -86,7 +89,7 @@ function drawFrame(frame) {
 
     // frame info
     noStroke();
-    fill(255);
+    fill(FOREGROUND);
     textSize(12);
     text(frame.project, margin + 10, toPixels(frame.start)-10)
 }
@@ -102,10 +105,13 @@ function drawTimeline() {
   for (var i = draw_time.getTime(); i > bottom_millis; i -= (60 * 60 * 1000)) {
     draw_time.setTime(i);
     px = toPixels(draw_time.getTime() / 1000);
-    opacity = px / height * 100;
+    opacity = px / height * 150;
 
-    stroke(255, opacity);
-    fill(255, opacity);
+    var fg = color(FOREGROUND.toString());
+    fg.setAlpha(opacity);
+
+    stroke(fg);
+    fill(fg);
 
     if (draw_time.getHours() == 0) {
       strokeWeight(2);

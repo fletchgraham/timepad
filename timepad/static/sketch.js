@@ -35,11 +35,23 @@ function setup() {
   frameRate(1);
   reset_offset();
   CONTEXT = 'TIMELINE';
+  FOREGROUND = color(100, 255, 100);
   BUTTON_PRESSED = false;
   strokeJoin(ROUND);
   strokeCap(ROUND);
+
+  // style
+  fg = FOREGROUND.toString();
+  select('html').style('color', fg);
+  select('a').style('color', fg);
+  select('#toolbar').style('border', '1px solid ' + fg);
+  for(let b of selectAll('button')) {
+    b.style('border', '1px solid ' + fg);
+    b.style('color', fg);
+  }
   createCanvas(windowWidth,windowHeight);
 
+  // buttons
   del_btn = select('#delete_btn');
   del_btn.mousePressed(delete_btn_callback);
   del_btn.touchStarted(delete_btn_callback);
