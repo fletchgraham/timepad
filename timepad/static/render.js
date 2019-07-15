@@ -138,9 +138,41 @@ function drawTimeline() {
 //////////////////////////////////////////////////////////////////////////////
 // Sky
 
+/** take and hour btwn 0 and 24 and set the global sky gradient accordingly. */
+function initSky(h) {
+  var morning, midday, evening, night;
+  var times = [0, 6, 12, 18, 24];
+  morning = [color(250, 140, 60), color(100, 100, 200)];
+  midday = [color(111, 181, 227), color(3, 5, 116)];
+  evening = [color(234, 214, 199), color(24, 57, 120)];
+  night = [color(10, 0, 50), color(0, 3, 20)];
+  if (times[0] < h && h <= times[1]) {
+    amt = (h - times[0])/times[1];
+    horizon = lerpColor(night[0], morning[0], amt);
+    zenith = lerpColor(night[1], morning[1], amt);
+  }
+  else if (times[1] < h && h <= times[2]) {
+    amt = (h - times[1])/times[2];
+    horizon = lerpColor(morning[0], midday[0], amt);
+    zenith = lerpColor(morning[1], midday[1], amt);
+  }
+  else if (times[2] < h && h <= times[3]) {
+    amt = (h - times[2])/times[3];
+    horizon = lerpColor(midday[0], evening[0], amt);
+    zenith = lerpColor(midday[1], evening[1], amt);
+  }
+  else if (times[3] < h && h <= times[4] ) {
+    amt = (h - times[3])/times[4];
+    horizon = lerpColor(evening[0], night[0], amt);
+    zenith = lerpColor(evening[1], night[1], amt);
+  }
+  else {
+    horizon = night[0];
+    zenith = night[1];
+  }
+}
+
 function drawSky() {
-  var horizon = color(234, 214, 199);
-  var zenith = color(24, 57, 120);
   var r = height*1.6; // pythagorus helps cover the screen
   drawGradient(horizon, zenith);
 }

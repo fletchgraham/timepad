@@ -25,6 +25,8 @@ var start_btn;
 var now_btn;
 var done_btn;
 
+// sky gradient
+var horizon, zenith;
 
 //////////////////////////////////////////////////////////////////////////////
 // Setup and Draww
@@ -32,10 +34,13 @@ var done_btn;
 p5.disableFriendlyErrors = true; // disables FES for performance
 
 function setup() {
+  initSky(new Date().getHours());
   frameRate(1);
   reset_offset();
   CONTEXT = 'TIMELINE';
   FOREGROUND = color(100, 255, 100);
+  FOREGROUND_ALPHA = color(FOREGROUND.toString());
+  FOREGROUND_ALPHA.setAlpha(100);
   BUTTON_PRESSED = false;
   strokeJoin(ROUND);
   strokeCap(ROUND);
