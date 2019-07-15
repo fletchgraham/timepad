@@ -32,10 +32,36 @@ function drawDebug() {
     text('context: ' + CONTEXT, width - margin, height - margin - 25);
     text('offset: ' + str(OFFSET), width - margin, height - margin);
 
-    // draw now marker
-    text('NOW', width - margin, toPixels(now()));
-
     textAlign(LEFT);
+}
+
+function drawNow() {
+  var n = toPixels(now());
+  var h = 30; // height of flag
+  var w = 90; // width of flag
+  var x = w + 10; // x point of flag
+
+  noFill();
+  stroke(255);
+  strokeWeight(2);
+
+  // verticies of the flag
+  beginShape();
+  vertex(x, n);
+  vertex(x - h/2, n - h/2);
+  vertex(x - w, n - h/2);
+  vertex(x - w, n + h/2);
+  vertex(x - h/2, n + h/2);
+  vertex(x, n);
+  vertex(width/2 - 40, n);
+  endShape();
+
+  fill(255);
+  textSize(18);
+  noStroke();
+  textAlign(CENTER, CENTER);
+  text('NOW', x - w/2 - 10, toPixels(now()));
+  textAlign(LEFT);
 }
 
 //////////////////////////////////////////////////////////////////////////////
