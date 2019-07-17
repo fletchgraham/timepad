@@ -73,16 +73,20 @@ function setup() {
 
   start_btn = select('#start_btn');
   start_btn.mousePressed(start_btn_callback);
+  start_btn.touchStarted(start_btn_callback);
 
   now_btn = select('#now_btn');
   now_btn.mousePressed(jumpt_to_now);
+  now_btn.touchStarted(jumpt_to_now);
 
   edit_btn = select('#edit_btn');
   edit_btn.hide();
   edit_btn.mousePressed(edit_btn_callback);
+  edit_btn.touchStarted(edit_btn_callback);
 
   done_btn = select('#done_edit_btn');
   done_btn.mousePressed(done_edit_callback);
+  done_btn.touchStarted(done_edit_callback);
 
   timeline = new Timeline();
 
