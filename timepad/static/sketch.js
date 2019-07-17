@@ -151,6 +151,7 @@ function jumpt_to_now() {
 function edit_btn_callback() {
   BUTTON_PRESSED = true;
   CONTEXT = 'EDITING'
+  select('#project_input').value(selectedFrame().project);
   var form = select('#edit_frame_form');
   select('#toolbar').hide();
   //form.center();
@@ -161,9 +162,11 @@ function edit_btn_callback() {
 function done_edit_callback() {
   BUTTON_PRESSED = true;
   CONTEXT = 'TIMELINE';
+  selectedFrame().project = select('#project_input').value();
   var form = select('#edit_frame_form');
   form.hide();
   select('#toolbar').show();
+  sync();
   return false;
 }
 
@@ -181,9 +184,13 @@ function windowResized() {
 }
 
 function touchStarted() {
+  if (BUTTON_PRESSED == true) {
+    return;
+  }
   if (CONTEXT != 'TIMELINE') {
     return;
-  } else {
+  }
+  else {
     framesTouch();
     timeline.touched();
     redraw();
@@ -192,12 +199,17 @@ function touchStarted() {
 
 function touchEnded() {
   BUTTON_PRESSED = false;
+  redraw();
 }
 
 function touchMoved() {
   if (BUTTON_PRESSED == true) {
     return false;
-  } else {
+  }
+  if (CONTEXT != 'TIMELINE') {
+    return;
+  }
+  else {
     timeline.dragged();
     redraw();
     return false;
@@ -242,6 +254,14 @@ class Frame {
     this.project = 'project';
     this.selected = true;
     this.recording = false;
+  }
+}
+
+function selectedFrame() {
+  for (let frame of FRAMES) {
+    if (frame.selected == true) {
+      return frame;
+    }
   }
 }
 
