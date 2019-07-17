@@ -12,7 +12,7 @@ body {
     overscroll-behavior: none;
 }
 
-h1, h2, h3, h4, h5 p {
+h1, h2, h3, h4, h5, p {
   font-weight: 100;
 }
 
@@ -134,7 +134,6 @@ button:focus {
 }
 
 #edit_frame_form {
-  border:1px solid white;
   background: none;
   position: fixed;
   left:7%;

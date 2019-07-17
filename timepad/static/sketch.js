@@ -18,7 +18,7 @@ let FRAMES = [];
 // ui
 var CONTEXT;
 var BUTTON_PRESSED;
-var FOREGROUND;
+var UI_A;
 let timeline;
 var del_btn;
 var start_btn;
@@ -38,18 +38,28 @@ function setup() {
   frameRate(1);
   reset_offset();
   CONTEXT = 'TIMELINE';
-  FOREGROUND = color(100, 255, 100);
-  FOREGROUND_ALPHA = color(FOREGROUND.toString());
-  FOREGROUND_ALPHA.setAlpha(100);
   BUTTON_PRESSED = false;
   strokeJoin(ROUND);
   strokeCap(ROUND);
 
   // style
-  fg = FOREGROUND.toString();
+
+  UI_A = color(0, 255, 130)
+  UI_B = color(UI_A.toString());
+  UI_B.setAlpha(100);
+  UI_C = color(UI_A.toString());
+  UI_C.setAlpha(200);
+
+  fg = UI_A.toString();
   select('html').style('color', fg);
   select('a').style('color', fg);
+  for(let b of selectAll('input')) {
+    b.style('background', UI_B.toString());
+    b.style('border', '2px solid ' + fg);
+    b.style('color', fg);
+  }
   for(let b of selectAll('button')) {
+    b.style('background', UI_B.toString());
     b.style('border', '2px solid ' + fg);
     b.style('color', fg);
   }
@@ -116,7 +126,7 @@ function start_btn_callback() {
   BUTTON_PRESSED = true;
   startFrame();
   start_btn.html('Stop')
-  start_btn.style('background', FOREGROUND_ALPHA);
+  start_btn.style('background', UI_C);
   start_btn.mousePressed(stop_btn_callback);
 }
 
@@ -124,7 +134,7 @@ function stop_btn_callback() {
   BUTTON_PRESSED = true;
   stopFrame();
   start_btn.html('Start')
-  start_btn.style('background', 'none');
+  start_btn.style('background', UI_B);
   start_btn.mousePressed(start_btn_callback);
 }
 

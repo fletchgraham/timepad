@@ -9,7 +9,7 @@ function drawCrosshair() {
   var centerY = height/2;
   var size = 50;
   var focus = 3; // how far in do the hairs reach
-  stroke(FOREGROUND);
+  stroke(UI_A);
   strokeWeight(2)
   noFill()
   circle(centerX, centerY, size);
@@ -22,7 +22,7 @@ function drawCrosshair() {
 /** Draw helpful, yet perhaps impermanent info. */
 function drawDebug() {
     // font settings
-    fill(FOREGROUND);
+    fill(UI_A);
     textSize(16);
     noStroke();
     textAlign(RIGHT);
@@ -41,8 +41,8 @@ function drawNow() {
   var w = 90; // width of flag
   var x = w + 10; // x point of flag
 
-  noFill();
-  stroke(FOREGROUND);
+  fill(UI_B);
+  stroke(UI_A);
   strokeWeight(2);
 
   // verticies of the flag
@@ -56,7 +56,7 @@ function drawNow() {
   vertex(width/2 - 40, n);
   endShape();
 
-  fill(FOREGROUND);
+  fill(UI_A);
   textSize(18);
   noStroke();
   textAlign(CENTER, CENTER);
@@ -71,16 +71,12 @@ function drawNow() {
 function drawFrame(frame) {
     // frame rect
     rectMode(CORNERS);
-    stroke(FOREGROUND);
+    stroke(UI_A);
     strokeWeight(2);
-    var f = color(FOREGROUND.toString());
-    f.setAlpha(100);
-    fill(f);
+    fill(UI_B);
     var margin = width/4;
     if (frame.selected == true) {
-        stroke(FOREGROUND);
-        f.setAlpha(200);
-        fill(f);
+        fill(UI_C);
     }
     if (frame.recording == true) {
         noFill();
@@ -89,8 +85,8 @@ function drawFrame(frame) {
 
     // frame info
     noStroke();
-    fill(FOREGROUND);
-    textSize(12);
+    fill(UI_A);
+    textSize(16);
     text(frame.project, margin + 10, toPixels(frame.start)-10)
 }
 
@@ -107,7 +103,7 @@ function drawTimeline() {
     px = toPixels(draw_time.getTime() / 1000);
     opacity = px / height * 150;
 
-    var fg = color(FOREGROUND.toString());
+    var fg = color(UI_A.toString());
     fg.setAlpha(opacity);
 
     stroke(fg);
