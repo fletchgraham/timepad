@@ -31,6 +31,9 @@ function drawDebug() {
     // debug redouts
     text('context: ' + CONTEXT, width - margin, height - margin - 25);
     text('offset: ' + str(OFFSET), width - margin, height - margin);
+    if (BUTTON_PRESSED == true) {
+      text('BUTTON PRESSED', width - margin, height - margin - 50);
+    }
 
     textAlign(LEFT);
 }
