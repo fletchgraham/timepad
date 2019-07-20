@@ -44,25 +44,21 @@ function setup() {
 
   // style
 
-  UI_A = color(0, 255, 130)
-  UI_B = color(UI_A.toString());
-  UI_B.setAlpha(100);
-  UI_C = color(UI_A.toString());
-  UI_C.setAlpha(200);
-
-  fg = UI_A.toString();
-  select('html').style('color', fg);
-  select('a').style('color', fg);
+  stroke_color = settings.stroke_color.toString();
+  fill_color = settings.fill_color.toString();
+  select('html').style('color', stroke_color);
+  select('a').style('color', stroke_color);
   for(let b of selectAll('input')) {
-    b.style('background', UI_B.toString());
-    b.style('border', '2px solid ' + fg);
-    b.style('color', fg);
+    b.style('background', fill_color);
+    b.style('border', '2px solid ' + stroke_color);
+    b.style('color', stroke_color);
   }
   for(let b of selectAll('button')) {
-    b.style('background', UI_B.toString());
-    b.style('border', '2px solid ' + fg);
-    b.style('color', fg);
+    b.style('background', fill_color);
+    b.style('border', '2px solid ' + stroke_color);
+    b.style('color', stroke_color);
   }
+
   createCanvas(windowWidth,windowHeight);
 
   // buttons
@@ -130,7 +126,7 @@ function start_btn_callback() {
   BUTTON_PRESSED = true;
   startFrame();
   start_btn.html('Stop')
-  start_btn.style('background', UI_C);
+  start_btn.style('background', settings.active_color);
   start_btn.mousePressed(stop_btn_callback);
 }
 
@@ -138,7 +134,7 @@ function stop_btn_callback() {
   BUTTON_PRESSED = true;
   stopFrame();
   start_btn.html('Start')
-  start_btn.style('background', UI_B);
+  start_btn.style('background', settings.fill_color);
   start_btn.mousePressed(start_btn_callback);
 }
 
