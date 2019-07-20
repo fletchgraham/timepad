@@ -19,14 +19,13 @@ let FRAMES = [];
 var CONTEXT;
 var BUTTON_PRESSED;
 var UI_A;
+var settings;
+var sky;
 let timeline;
 var del_btn;
 var start_btn;
 var now_btn;
 var done_btn;
-
-// sky gradient
-var horizon, zenith;
 
 //////////////////////////////////////////////////////////////////////////////
 // Setup and Draww
@@ -34,15 +33,19 @@ var horizon, zenith;
 p5.disableFriendlyErrors = true; // disables FES for performance
 
 function setup() {
-  initSky(new Date().getHours());
   frameRate(1);
-  reset_offset();
+
+  settings = new Settings();
+  sky = new Sky(settings);
+  timeline = new Timeline();
+
   CONTEXT = 'TIMELINE';
   BUTTON_PRESSED = false;
-  strokeJoin(ROUND);
-  strokeCap(ROUND);
+  reset_offset();
 
   // style
+  strokeJoin(ROUND);
+  strokeCap(ROUND);
 
   stroke_color = settings.stroke_color.toString();
   fill_color = settings.fill_color.toString();
@@ -84,16 +87,15 @@ function setup() {
   done_btn.mousePressed(done_edit_callback);
   done_btn.touchStarted(done_edit_callback);
 
-  timeline = new Timeline();
-
   loadFrames();
 }
 
 function draw() {
   OFFSET = LAST_OFFSET + now();
 
-  background(24);
-  drawSky();
+  background(settings.background_color);
+
+  sky.render();
 
   if (CONTEXT == 'TIMELINE') {
     drawTimeline();
