@@ -36,8 +36,8 @@ function setup() {
   frameRate(1);
 
   settings = new Settings();
-  sky = new Sky(settings);
   timeline = new Timeline();
+  sky = new Sky(settings);
 
   CONTEXT = 'TIMELINE';
   BUTTON_PRESSED = false;
@@ -98,7 +98,7 @@ function draw() {
   sky.render();
 
   if (CONTEXT == 'TIMELINE') {
-    drawTimeline();
+    timeline.render();
 
     // draw frames
     for (f in FRAMES) {
@@ -220,24 +220,6 @@ function mouseWheel(event) {
   ZOOM = constrain(ZOOM + event.delta * dampening, 10, 1000);
   redraw();
   //return false;
-}
-
-//////////////////////////////////////////////////////////////////////////////
-// Timeline
-
-class Timeline {
-
-  touched() {
-    START = OFFSET;
-    DELTA_Y = mouseY;
-    DOWN_Y = mouseY;
-  }
-
-  dragged() {
-    DELTA_Y = mouseY - DOWN_Y;
-    OFFSET = START + DELTA_Y * ZOOM;
-    LAST_OFFSET = OFFSET - now();
-  }
 }
 
 //////////////////////////////////////////////////////////////////////////////
