@@ -17,12 +17,12 @@ class Sky {
       24: color(10, 0, 50)
     };
   }
-  render() {
+  render(time_in_seconds) {
     if (settings.sky != true) {
       return;
     }
-    var c1 = now_color(this.horizon_lookup);
-    var c2 = now_color(this.zenith_lookup);
+    var c1 = time_color(time_in_seconds, this.horizon_lookup);
+    var c2 = time_color(time_in_seconds, this.zenith_lookup);
     drawGradient(c1, c2);
   }
 }
@@ -30,8 +30,9 @@ class Sky {
 //////////////////////////////////////////////////////////////////////////////
 // Helpers
 
-function now_color(lookup) {
-  var n = hour() + minute()/60;
+function time_color(seconds, lookup) {
+  var d = new Date(seconds * 1000);
+  var n = d.getHours() + d.getMinutes()/60;
   var color1 = color(0);
   var color2 = color(0);
   var t1 = 0;

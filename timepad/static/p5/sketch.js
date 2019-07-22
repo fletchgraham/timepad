@@ -58,7 +58,7 @@ function draw() {
 
   background(settings.background_color);
 
-  sky.render();
+  sky.render(OFFSET);
 
   if (CONTEXT == 'TIMELINE') {
     timeline.render();
