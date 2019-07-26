@@ -46,6 +46,8 @@ function style_the_dom() {
 
 function start_btn_callback() {
   BUTTON_PRESSED = true;
+  STARTED = OFFSET;
+  RECORDING = true;
   startFrame();
   start_btn.html('Stop')
   start_btn.style('background', settings.active_color);
@@ -54,6 +56,7 @@ function start_btn_callback() {
 
 function stop_btn_callback() {
   BUTTON_PRESSED = true;
+  RECORDING = false;
   stopFrame();
   start_btn.html('Start')
   start_btn.style('background', settings.fill_color);

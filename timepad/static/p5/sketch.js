@@ -14,6 +14,9 @@ var START = 0;
 
 // model
 let FRAMES = [];
+let STARTED;
+let ELAPSED;
+let RECORDING;
 
 // ui
 var CONTEXT;
@@ -42,6 +45,9 @@ function setup() {
 
   CONTEXT = 'TIMELINE';
   BUTTON_PRESSED = false;
+  RECORDING = false;
+  STARTED = 0;
+  ELAPSED = 0;
   reset_offset();
 
   define_the_buttons();
@@ -55,6 +61,7 @@ function setup() {
 
 function draw() {
   OFFSET = LAST_OFFSET + now();
+  ELAPSED = OFFSET - STARTED;
 
   background(settings.background_color);
 
@@ -80,8 +87,26 @@ function draw() {
     }
   }
 
+  drawElapsed();
   drawDebug();
 
+}
+
+function drawElapsed() {
+  if (RECORDING != true) {
+    return;
+  }
+  var minutes = Math.round(ELAPSED / 60);
+  var hours = Math.round(minutes * 100 / 60) / 100;
+  textSize(width * .1);
+  textAlign(CENTER);
+  fill(settings.stroke_color);
+  noStroke();
+  if (hours < 1) {
+    text(minutes + ' MINUTES', width/2, height/4);
+  } else {
+    text(hours + ' HOURS', width/2, height/4);
+  }
 }
 
 //////////////////////////////////////////////////////////////////////////////
