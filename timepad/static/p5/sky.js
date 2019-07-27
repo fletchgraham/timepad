@@ -1,7 +1,7 @@
 
 class Sky {
-  constructor(settings) {
-    this.settings = settings;
+  constructor(model) {
+    this.model = model;
     this.zenith_lookup = {
       0: color(0, 3, 20),
       6: color(100, 100, 200),
@@ -17,12 +17,13 @@ class Sky {
       24: color(10, 0, 50)
     };
   }
-  render(time_in_seconds) {
-    if (settings.sky != true) {
+  render() {
+    if (model.sky != true) {
       return;
     }
-    var c1 = time_color(time_in_seconds, this.horizon_lookup);
-    var c2 = time_color(time_in_seconds, this.zenith_lookup);
+    let n = now();
+    var c1 = time_color(n, this.horizon_lookup);
+    var c2 = time_color(n, this.zenith_lookup);
     drawGradient(c1, c2);
   }
 }

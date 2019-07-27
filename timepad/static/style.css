@@ -134,12 +134,13 @@ button:focus {
 }
 
 #edit_frame_form {
-  background: none;
+  padding: 10%;
+  background: rgb(0,0,0,.7);
   position: fixed;
-  left:7%;
-  right:7%;
-  top:7%;
-  bottom:7%;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
   display: none;
   flex-direction: column;
 }

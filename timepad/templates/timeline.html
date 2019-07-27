@@ -4,26 +4,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
     <script src="{{ url_for('static', filename='p5/utilities.js') }}"></script>
-    <script src="{{ url_for('static', filename='p5/settings.js') }}"></script>
+    <script src="{{ url_for('static', filename='p5/model.js') }}"></script>
     <script src="{{ url_for('static', filename='p5/timeline.js') }}"></script>
     <script src="{{ url_for('static', filename='p5/sky.js') }}"></script>
+    <script src="{{ url_for('static', filename='p5/frameset.js') }}"></script>
+    <script src="{{ url_for('static', filename='p5/overlays.js') }}"></script>
     <script src="{{ url_for('static', filename='p5/dom.js') }}"></script>
-    <script src="{{ url_for('static', filename='p5/render.js') }}"></script>
     <script src="{{ url_for('static', filename='p5/sketch.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 <div id="toolbar">
-    <button id="start_btn">Start</button>
-    <button id="now_btn">Now</button>
-    <button id="edit_btn">Edit</button>
-    <button id="delete_btn">Delete</button>
+    <button id="start_btn" onclick="start_btn_callback()">Start</button>
+    <button id="stop_btn" onclick="stop_btn_callback()">Stop</button>
+    <button id="now_btn" onclick="jumpt_to_now()">Now</button>
+    <button id="edit_btn" onclick="edit_btn_callback()">Edit</button>
+    <button id="delete_btn" onclick="delete_btn_callback()">Delete</button>
 </div>
 
 <div id="edit_frame_form" class="modal">
     <h2 style="text-align: center;">Edit Frame</h2>
     <label for="project">project</label>
     <input id="project_input" type="text" name="project" value="hey"></input>
-    <button id="done_edit_btn">Done</button>
+    <button id="done_edit_btn" onclick="done_edit_callback()">Done</button>
 </div>
 {% endblock %}

@@ -1,15 +1,21 @@
 class Timeline {
+  constructor(model) {
+    this.model = model;
+    this.start = 0;
+    this.deltaY = 0;
+    this.downY = 0
+  }
 
   touched() {
-    START = OFFSET;
-    DELTA_Y = mouseY;
-    DOWN_Y = mouseY;
+    this.start = this.model.offset;
+    this.deltaY = mouseY;
+    this.downY = mouseY;
   }
 
   dragged() {
-    DELTA_Y = mouseY - DOWN_Y;
-    OFFSET = START + DELTA_Y * ZOOM;
-    LAST_OFFSET = OFFSET - now();
+    this.deltaY = mouseY - this.downY;
+    this.model.offset = this.start + this.deltaY * this.model.zoom;
+    this.model.last_offset = this.model.offset - now();
   }
 
   render() {
@@ -21,7 +27,7 @@ class Timeline {
       var px = toPixels(draw_time.getTime() / 1000);
       var opacity = px / height * 150;
 
-      var fg = color(settings.stroke_color.toString());
+      var fg = color(model.style.stroke_color.toString());
       fg.setAlpha(opacity);
 
       stroke(fg);
@@ -33,7 +39,7 @@ class Timeline {
         noStroke();
         textSize(18);
         text(str(draw_time), 10, px - 5);
-      } else if (ZOOM < 200) {
+      } else if (this.model.zoom < 200) {
 
         // hour lines
         textAlign(LEFT, BOTTOM);
