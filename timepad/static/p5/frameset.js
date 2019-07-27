@@ -25,6 +25,7 @@ class Frameset {
       let frame = this.model.frames[i];
       if (frame.over(mouseX, mouseY)) {
         frame.selected = true;
+        return;
       }
     }
   }
@@ -36,6 +37,17 @@ class Frameset {
         return frame;
       }
     }
+  }
+
+  /** Return the frame that is being recorded */
+  recording() {
+    var frame = null;
+    for (let f of this.model.frames) {
+      if (f.recording == true) {
+        frame = f;
+      }
+    }
+    return frame;
   }
 
   /** Set the selected attribute of all frames to false */
@@ -63,9 +75,11 @@ class Frameset {
     this.model.frames.push(new_frame);
   }
 
+  /** Stop recording */
   stop() {
     this.deselectAll();
-    for (let frame of this.model.frames) {
+    for (let f in this.model.frames) {
+      let frame = this.model.frames[f];
       if (frame.recording == true) {
         if (frame.stop - frame.start < 60) {
           this.model.frames.splice(f, 1);

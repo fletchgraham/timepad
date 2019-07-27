@@ -9,6 +9,7 @@ let timeline;
 let frameset;
 let crosshair;
 let now_marker;
+let elapsed_time;
 
 let mainscreen;
 
@@ -36,13 +37,15 @@ function setup() {
   frameset = new Frameset(model);
   crosshair = new Crosshair(model);
   now_marker = new NowMarker(model);
+  elapsed_time = new ElapsedTime(model);
 
   mainscreen = [
     sky,
     timeline,
     frameset,
     crosshair,
-    now_marker
+    now_marker,
+    elapsed_time
   ];
 
   define_the_buttons(model);

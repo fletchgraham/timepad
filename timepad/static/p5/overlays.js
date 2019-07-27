@@ -57,3 +57,26 @@ class NowMarker {
     textAlign(LEFT);
   }
 }
+
+class ElapsedTime {
+  constructor(model) {
+    this.model = model;
+  }
+  render() {
+    if (frameset.recording() == null) {
+      return;
+    }
+    let t = this.model.offset - frameset.recording().start;
+    let minutes = Math.round(t / 60);
+    let hours = Math.round(minutes * 100 / 60) / 100;
+
+    textSize(width/10);
+    textAlign(CENTER, CENTER);
+
+    if (hours < 1) {
+      text(minutes + ' MINUTES', width/2, height/4);
+    } else {
+      text(hours + ' HOURS', width/2, height/4);
+    }
+  }
+}
