@@ -102,9 +102,11 @@ function touchMoved(event) {
 }
 
 function mouseWheel(event) {
-  var dampening = 1 / (1000 / model.zoom);
-  model.zoom = constrain(model.zoom + event.delta * dampening, 10, 1000);
-  redraw();
+  if (model.context == 'mainscreen') {
+    var dampening = 1 / (1000 / model.zoom);
+    model.zoom = constrain(model.zoom + event.delta * dampening, 10, 1000);
+    redraw();
+  }
 }
 
 //////////////////////////////////////////////////////////////////////////////
