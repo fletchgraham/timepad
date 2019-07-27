@@ -16,11 +16,14 @@ class Crosshair {
     line(centerX, centerY - size/2, centerX, centerY - size/focus);
     line(centerX, centerY + size/focus, centerX, centerY + size/2);
 
+    var d = new Date(this.model.offset * 1000);
+    var readout = d.toISOString().substr(11, 5);
+
     noStroke();
     fill(this.model.style.stroke_color);
     textSize(18);
-    textAlign(LEFT, CENTER);
-    text(this.model.offset, centerX + size/2 + 10, centerY);
+    textAlign(CENTER, TOP);
+    text(readout, centerX, centerY + size/2 + 10);
   }
 }
 
