@@ -17,7 +17,7 @@ class Crosshair {
     line(centerX, centerY + size/focus, centerX, centerY + size/2);
 
     var d = new Date(this.model.offset * 1000);
-    var readout = d.toISOString().substr(11, 5);
+    var readout = d.toString().substr(16, 5);
 
     noStroke();
     fill(this.model.style.stroke_color);
