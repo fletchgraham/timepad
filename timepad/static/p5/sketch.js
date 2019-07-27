@@ -18,6 +18,13 @@ let stop_btn;
 let now_btn;
 let edit_btn;
 let delete_btn;
+let settings_btn;
+
+let background_input;
+let fill_input;
+let stroke_input;
+let active_input;
+let sky_checkbox;
 
 //////////////////////////////////////////////////////////////////////////////
 // Setup

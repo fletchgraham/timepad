@@ -15,17 +15,32 @@
 
 {% block content %}
 <div id="toolbar">
-    <button id="start_btn" onclick="start_btn_callback()">Start</button>
-    <button id="stop_btn" onclick="stop_btn_callback()">Stop</button>
-    <button id="now_btn" onclick="jumpt_to_now()">Now</button>
-    <button id="edit_btn" onclick="edit_btn_callback()">Edit</button>
-    <button id="delete_btn" onclick="delete_btn_callback()">Delete</button>
+    <button id="start_btn" onclick="start_btn_callback()">REC</button>
+    <button id="stop_btn" onclick="stop_btn_callback()">STOP</button>
+    <button id="now_btn" onclick="jumpt_to_now()">NOW</button>
+    <button id="edit_btn" onclick="edit_btn_callback()">EDIT</button>
+    <button id="delete_btn" onclick="delete_btn_callback()">DEL</button>
+    <button id="settings_btn" onclick="settings_btn_callback()">PREF</button>
 </div>
 
 <div id="edit_frame_form" class="modal">
-    <h2 style="text-align: center;">Edit Frame</h2>
-    <label for="project">project</label>
-    <input id="project_input" type="text" name="project" value="hey"></input>
-    <button id="done_edit_btn" onclick="done_edit_callback()">Done</button>
+    <h2 style="text-align: center;">EDIT FRAME</h2>
+    <label for="project">PROJECT</label>
+    <input id="project_input" type="text" name="project"></input>
+    <button id="done_edit_btn" onclick="done_edit_callback()">DONE</button>
+</div>
+
+<div id="settings_form" class="modal">
+    <h2 style="text-align: center;">SETTINGS</h2>
+
+    <p>COLORS<p>
+    <input id="background_input" type="text"></input> BACKGROUND<br>
+    <input id="fill_input" type="text"></input> FILL<br>
+    <input id="stroke_input" type="text"></input> STROKE<br>
+    <input id="active_input" type="text" ></input> ACTIVE<br>
+    <br>
+    <input id = "sky_checkbox" type="checkbox" name="sky" value="sky"></input>DRAW SKY<br>
+
+    <button id="done_settings_btn" onclick="done_settings_callback()">DONE</button>
 </div>
 {% endblock %}

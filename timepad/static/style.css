@@ -98,7 +98,7 @@ input[type=submit] {
   min-width: 10em;
 }
 
-input {
+input[type=text] {
   -webkit-appearance: none;
   border: 1px solid white;
   background: none;
@@ -133,7 +133,7 @@ button:focus {
   top: 50px;
 }
 
-#edit_frame_form {
+.modal {
   padding: 10%;
   background: rgb(0,0,0,.7);
   position: fixed;
@@ -141,6 +141,14 @@ button:focus {
   right:0;
   top:0;
   bottom:0;
-  display: none;
   flex-direction: column;
+  overflow: scroll;
+}
+
+#edit_frame_form {
+  display: none;
+}
+
+#settings_form {
+  display: none;
 }
