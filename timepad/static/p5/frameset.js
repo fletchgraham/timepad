@@ -119,9 +119,9 @@ class Frame {
 
   /** Draw a representation of the frame. */
   render() {
-    let sc = model.style.stroke_color;
-    let fc = model.style.fill_color;
-    let ac = model.style.active_color;
+    let sc = model.settings.stroke_color;
+    let fc = model.settings.fill_color;
+    let ac = model.settings.active_color;
 
     let bottom = toPixels(this.start);
     let top = toPixels(this.stop);

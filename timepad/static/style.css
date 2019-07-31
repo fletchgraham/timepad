@@ -135,7 +135,6 @@ button:focus {
 
 .modal {
   padding: 10%;
-  background: rgb(0,0,0,.7);
   position: fixed;
   left:0;
   right:0;

@@ -37,6 +37,7 @@ function setup() {
 
   model = new Model();
   loadFrames();
+  loadSettings();
 
   // ui elements
   sky = new Sky(model);
@@ -56,7 +57,6 @@ function setup() {
   ];
 
   define_the_buttons(model);
-  style_the_dom(model);
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@ function setup() {
 
 function draw() {
   model.update()
-  background(model.style.background_color);
+  background(model.settings.background_color);
 
   if (model.context == 'mainscreen') {
     for (let element of mainscreen) {
@@ -124,5 +124,14 @@ function loadFrames() {
     var json_response = JSON.parse(str(response));
     model.loadFrames(json_response);
     redraw();
+  });
+}
+
+function loadSettings() {
+  httpGet('data/settings', function(response) {
+    var json_response = JSON.parse(str(response));
+    model.loadSettings(json_response);
+    redraw();
+    style_the_dom(model);
   });
 }

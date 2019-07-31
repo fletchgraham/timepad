@@ -27,7 +27,7 @@ class Timeline {
       var px = toPixels(draw_time.getTime() / 1000);
       var opacity = px / height * 150;
 
-      var fg = color(model.style.stroke_color.toString());
+      var fg = color(model.settings.stroke_color.toString());
       fg.setAlpha(opacity);
 
       stroke(fg);
