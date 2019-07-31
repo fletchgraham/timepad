@@ -7,6 +7,11 @@ def test_data_loggedin(client, auth):
     res = client.get('data/frames').data
     assert b'[[],[]]' in res
 
+def test_settings(client, auth):
+    auth.login()
+    res = client.get('data/settings').data
+    assert b'{}' in res
+
 def test_data_post(client, auth):
     auth.login()
     post_data = 'data'

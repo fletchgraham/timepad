@@ -9,15 +9,32 @@ bp = Blueprint('data', __name__, url_prefix='/data')
 
 @bp.route('/frames', methods=('GET', 'POST'))
 @login_required
-def register():
+def frames():
     user_id = session.get('user_id')
     if request.method == 'POST':
         sql = 'update timeline set frames=? where author_id=?'
-        db = get_db() 
+        db = get_db()
         db.execute(sql, (request.data, user_id,))
         db.commit()
         return request.data
 
     db = get_db()
     frames = db.execute('select * from timeline where author_id=?', (user_id,)).fetchone()['frames']
+    return frames
+
+@bp.route('/settings', methods=('GET', 'POST'))
+@login_required
+def settings():
+    user_id = session.get('user_id')
+    if request.method == 'POST':
+        sql = 'update timeline set settings=? where author_id=?'
+        db = get_db()
+        db.execute(sql, (request.data, user_id,))
+        db.commit()
+        return request.data
+
+    db = get_db()
+    frames = db.execute(
+        'select * from timeline where author_id=?',
+        (user_id,)).fetchone()['settings']
     return frames

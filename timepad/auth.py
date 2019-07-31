@@ -37,7 +37,7 @@ def register():
 
             # add empty json strings to the timeline table
             db.execute(
-                "INSERT INTO timeline (colors, frames, author_id) VALUES ('[{}]', '[[]]', ?)",
+                "INSERT INTO timeline (settings, frames, author_id) VALUES ('{}', '[[]]', ?)",
                 (user_id,)
             )
             db.commit()
