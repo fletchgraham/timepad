@@ -15,6 +15,10 @@ function now() {
   return n;
 }
 
+function secondsToDurHours(seconds) {
+  return Math.round(Math.round(seconds / 60 * 10) /60) / 10;
+}
+
 function roundToHour(date) {
   let p = 60 * 60 * 1000; // milliseconds in an hour
   return new Date(Math.round(date.getTime() / p ) * p);

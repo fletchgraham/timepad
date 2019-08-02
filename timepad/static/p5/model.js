@@ -14,6 +14,16 @@ class Model {
     this.last_offset = 0;
   }
 
+  duration(project) {
+    var total = 0;
+    for (let f of this.frames) {
+      if (f.project == project) {
+        total += f.duration();
+      }
+    }
+    return total;
+  }
+
   loadFrames(json) {
     this.frames = [];
     for (let i of json) {

@@ -103,6 +103,10 @@ class Frame {
     this.recording = false;
   }
 
+  duration() {
+    return this.stop - this.start;
+  }
+
   /** Return true if the given x and y are within the frame */
   over(x, y) {
     var x1 = width/4; // left side of frame
@@ -144,7 +148,13 @@ class Frame {
     noStroke();
     fill(sc);
     textSize(16);
-    text(this.project, margin + 10, bottom - 10)
+    var dur = secondsToDurHours(this.duration());
+    var total = secondsToDurHours(model.duration(this.project));
+    var readout = this.project;
+    if (this.recording == false) {
+      readout += ' ' + dur + ' / ' + total;
+    }
+    text(readout, margin + 10, bottom - 10)
   }
 }
 
