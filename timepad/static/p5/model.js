@@ -31,6 +31,7 @@ class Model {
       new_frame.stop = i.stop;
       new_frame.project = i.project;
       new_frame.selected = false;
+      new_frame.recording = i.recording;
       this.frames.push(new_frame);
     }
   }

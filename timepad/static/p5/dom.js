@@ -22,7 +22,11 @@ function style_the_dom(model) {
   select('html').style('color', stroke_color);
   select('a').style('color', stroke_color);
 
-  stop_btn.hide();
+  if (frameset.recording() == null) {
+    stop_btn.hide();
+  } else {
+    start_btn.hide();
+  }
 
   for(let b of selectAll('input')) {
     b.style('background', fill_color);
@@ -46,6 +50,7 @@ function start_btn_callback() {
   frameset.start();
   stop_btn.show();
   start_btn.hide();
+  sync();
   redraw()
 }
 
