@@ -68,11 +68,17 @@ function jumpt_to_now() {
 }
 
 function edit_btn_callback() {
+  if (frameset.selected() == null) {
+    return;
+  }
   model.context = 'form';
-  select('#project_input').value(frameset.selected().project);
+  var project_input = select('#project_input');
+  project_input.value(frameset.selected().project);
   var form = select('#edit_frame_form');
   select('#toolbar').hide();
   form.style('display', 'flex');
+  project_input.elt.focus();
+  project_input.elt.select();
   redraw();
 }
 

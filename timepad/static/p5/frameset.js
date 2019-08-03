@@ -67,11 +67,27 @@ class Frameset {
     }
   }
 
+  selectNext() {
+    var frames = this.model.frames;
+    for (var i in frames) {
+      if (frames[i].selected == true) {
+        if (i == 0) {
+          return;
+        }
+        frames[i].selected = false;
+        console.log(i - 1);
+        frames[i - 1].selected = true;
+        return;
+      }
+    }
+  }
+
   /** Start recording a new frame at the crosshair's offset */
   start() {
     this.deselectAll();
     let new_frame = new Frame(toSeconds(height / 2));
     new_frame.recording = true;
+    new_frame.selected = true;
     this.model.frames.push(new_frame);
   }
 
@@ -85,6 +101,7 @@ class Frameset {
           this.model.frames.splice(f, 1);
         } else {
         frame.recording = false;
+        frame.selected = true;
       }
       }
     }

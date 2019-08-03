@@ -116,6 +116,39 @@ function mouseWheel(event) {
   }
 }
 
+function keyPressed(event) {
+  var on_mainscreen = (model.context == 'mainscreen');
+  var recording = (frameset.recording() != null);
+
+  if (on_mainscreen) {
+    if (keyCode == 32 && recording) {
+      stop_btn_callback();
+    }
+    else if (keyCode == 32 && ! recording) {
+      start_btn_callback();
+    }
+    else if (keyCode == 13) {
+      edit_btn_callback();
+      return;
+    }
+    else if (keyCode == 78) {
+      jumpt_to_now();
+    }
+    else if (keyCode === DELETE) {
+      delete_btn_callback();
+    }
+    else if (keyCode === TAB) {
+      frameset.selectNext();
+      redraw();
+      return false;
+    }
+  }
+  if (keyCode == 13) {
+    done_edit_callback();
+    return;
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////
 // http
 
