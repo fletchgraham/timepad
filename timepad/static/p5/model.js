@@ -2,13 +2,6 @@ class Model {
   constructor() {
     this.context = 'mainscreen';
     this.frames = [];
-    this.settings = {
-      background_color: color(10),
-      fill_color: color(250, 100),
-      stroke_color: color(255),
-      active_color: color(255, 200),
-      sky: false
-    };
     this.zoom = 100;
     this.offset = now();
     this.last_offset = 0;
@@ -34,28 +27,6 @@ class Model {
       new_frame.recording = i.recording;
       this.frames.push(new_frame);
     }
-  }
-
-  loadSettings(json) {
-    this.settings.background_color = color(json.background_color);
-    this.settings.fill_color = color(json.fill_color);
-    this.settings.stroke_color = color(json.stroke_color);
-    this.settings.active_color = color(json.active_color);
-    this.settings.sky = json.sky;
-  }
-
-  saveSettings() {
-    var ob = {
-      background_color: this.settings.background_color.toString(),
-      fill_color: this.settings.fill_color.toString(),
-      stroke_color: this.settings.stroke_color.toString(),
-      active_color: this.settings.active_color.toString(),
-      sky: this.settings.sky
-    };
-    var msg =  JSON.stringify(ob);
-    httpPost('/data/settings', msg, function(result) {
-      redraw();
-    });
   }
 
   update() {

@@ -3,7 +3,7 @@
 // Global Variables
 let model;
 
-let settings;
+let SETTINGS;
 let sky;
 let timeline;
 let frameset;
@@ -36,6 +36,7 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
 
   model = new Model();
+  SETTINGS = new Settings();
   loadFrames();
   loadSettings();
 
@@ -64,7 +65,7 @@ function setup() {
 
 function draw() {
   model.update()
-  background(model.settings.background_color);
+  background(SETTINGS.background_color);
 
   if (model.context == 'mainscreen') {
     for (let element of mainscreen) {
@@ -163,7 +164,7 @@ function loadFrames() {
 function loadSettings() {
   httpGet('data/settings', function(response) {
     var json_response = JSON.parse(str(response));
-    model.loadSettings(json_response);
+    SETTINGS.load(json_response);
     redraw();
     style_the_dom(model);
   });

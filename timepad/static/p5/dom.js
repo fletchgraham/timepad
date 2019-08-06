@@ -14,10 +14,10 @@ function define_the_buttons(model) {
   sky_checkbox = document.getElementById('sky_checkbox');
 }
 
-function style_the_dom(model) {
-  var stroke_color = model.settings.stroke_color.toString();
-  var fill_color = model.settings.fill_color.toString();
-  var active_color = model.settings.active_color.toString();
+function style_the_dom() {
+  var stroke_color = SETTINGS.stroke_color.toString();
+  var fill_color = SETTINGS.fill_color.toString();
+  var active_color = SETTINGS.active_color.toString();
 
   select('html').style('color', stroke_color);
   select('a').style('color', stroke_color);
@@ -102,11 +102,11 @@ function settings_btn_callback() {
   model.context = 'form';
   var form = select('#settings_form');
 
-  background_input.value = model.settings.background_color.toString();
-  fill_input.value = model.settings.fill_color.toString();
-  stroke_input.value = model.settings.stroke_color.toString();
-  active_input.value = model.settings.active_color.toString();
-  sky_checkbox.checked = model.settings.sky;
+  background_input.value = SETTINGS.background_color.toString();
+  fill_input.value = SETTINGS.fill_color.toString();
+  stroke_input.value = SETTINGS.stroke_color.toString();
+  active_input.value = SETTINGS.active_color.toString();
+  sky_checkbox.checked = SETTINGS.sky;
 
   select('#toolbar').hide();
   form.style('display', 'flex');
@@ -117,13 +117,13 @@ function done_settings_callback() {
   model.context = 'mainscreen';
   var form = select('#settings_form');
 
-  model.settings.background_color = color(background_input.value)
-  model.settings.fill_color = color(fill_input.value)
-  model.settings.stroke_color = color(stroke_input.value)
-  model.settings.active_color = color(active_input.value)
-  model.settings.sky = sky_checkbox.checked;
+  SETTINGS.background_color = color(background_input.value)
+  SETTINGS.fill_color = color(fill_input.value)
+  SETTINGS.stroke_color = color(stroke_input.value)
+  SETTINGS.active_color = color(active_input.value)
+  SETTINGS.sky = sky_checkbox.checked;
 
-  model.saveSettings();
+  SETTINGS.save();
 
   form.hide();
 
