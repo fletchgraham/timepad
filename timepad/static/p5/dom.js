@@ -15,9 +15,9 @@ function define_the_buttons(model) {
 }
 
 function style_the_dom() {
-  var stroke_color = SETTINGS.stroke_color.toString();
-  var fill_color = SETTINGS.fill_color.toString();
-  var active_color = SETTINGS.active_color.toString();
+  var stroke_color = settings.stroke_color.toString();
+  var fill_color = settings.fill_color.toString();
+  var active_color = settings.active_color.toString();
 
   select('html').style('color', stroke_color);
   select('a').style('color', stroke_color);
@@ -102,11 +102,11 @@ function settings_btn_callback() {
   model.context = 'form';
   var form = select('#settings_form');
 
-  background_input.value = SETTINGS.background_color.toString();
-  fill_input.value = SETTINGS.fill_color.toString();
-  stroke_input.value = SETTINGS.stroke_color.toString();
-  active_input.value = SETTINGS.active_color.toString();
-  sky_checkbox.checked = SETTINGS.sky;
+  background_input.value = settings.background_color.toString();
+  fill_input.value = settings.fill_color.toString();
+  stroke_input.value = settings.stroke_color.toString();
+  active_input.value = settings.active_color.toString();
+  sky_checkbox.checked = settings.sky;
 
   select('#toolbar').hide();
   form.style('display', 'flex');
@@ -117,13 +117,13 @@ function done_settings_callback() {
   model.context = 'mainscreen';
   var form = select('#settings_form');
 
-  SETTINGS.background_color = color(background_input.value)
-  SETTINGS.fill_color = color(fill_input.value)
-  SETTINGS.stroke_color = color(stroke_input.value)
-  SETTINGS.active_color = color(active_input.value)
-  SETTINGS.sky = sky_checkbox.checked;
+  settings.background_color = color(background_input.value)
+  settings.fill_color = color(fill_input.value)
+  settings.stroke_color = color(stroke_input.value)
+  settings.active_color = color(active_input.value)
+  settings.sky = sky_checkbox.checked;
 
-  SETTINGS.save();
+  settings.save();
 
   form.hide();
 

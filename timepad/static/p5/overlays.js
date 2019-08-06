@@ -7,7 +7,7 @@ class Crosshair {
     var centerY = height/2;
     var size = 50;
     var focus = 3; // how far in do the hairs reach
-    stroke(SETTINGS.stroke_color);
+    stroke(settings.stroke_color);
     strokeWeight(2)
     noFill()
     circle(centerX, centerY, size);
@@ -20,7 +20,7 @@ class Crosshair {
     var readout = d.toString().substr(16, 5);
 
     noStroke();
-    fill(SETTINGS.stroke_color);
+    fill(settings.stroke_color);
     textSize(18);
     textAlign(CENTER, TOP);
     text(readout, centerX, centerY + size/2 + 10);
@@ -37,8 +37,8 @@ class NowMarker {
     var w = 90; // width of flag
     var x = w + 10; // x point of flag
 
-    fill(SETTINGS.fill_color);
-    stroke(SETTINGS.stroke_color);
+    fill(settings.fill_color);
+    stroke(settings.stroke_color);
     strokeWeight(2);
 
     // verticies of the flag
@@ -52,7 +52,7 @@ class NowMarker {
     vertex(width/2 - 40, n);
     endShape();
 
-    fill(SETTINGS.stroke_color);
+    fill(settings.stroke_color);
     textSize(18);
     noStroke();
     textAlign(CENTER, CENTER);

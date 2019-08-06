@@ -18,7 +18,7 @@ class Sky {
     };
   }
   render() {
-    if (SETTINGS.sky != true) {
+    if (settings.sky != true) {
       return;
     }
     let n = now();
