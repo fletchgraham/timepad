@@ -55,71 +55,35 @@ nav ul li a, nav ul li span, header .action {
   border: 1px solid #ad0000;
 }
 
-.content {
-  padding: 0 1rem 1rem;
-}
-
-.content > header {
-  display: flex;
-  align-items: flex-end;
-}
-
-.content > header h1 {
-  flex: auto;
-  margin: 1rem 0 0.25rem 0;
-}
-
-.content form {
-  margin: 1em 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.content label {
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-.content input, .content textarea {
-  margin-bottom: 1em;
-}
-
-.content textarea {
-  min-height: 12em;
-  resize: vertical;
-}
-
-input.danger {
-  color: #cc2f2e;
-}
-
-input[type=submit] {
-  align-self: start;
-  min-width: 10em;
-}
-
-input[type=text] {
+button, input[type=submit]  {
   -webkit-appearance: none;
-  border: 1px solid white;
+  border: 2px solid white;
   background: none;
+  display: block;
   color: white;
   padding: 1em;
+  margin-bottom: 10px;
+  width: 50%;
+}
+
+input[type=text], input[type=password] {
+  -webkit-appearance: none;
+  border: 2px solid white;
+  background: none;
+  display: block;
+  color: white;
+  padding: 1em;
+  margin-bottom: 10px;
+  width:100%;
+}
+
+input[type=checkbox] {
+  width: 20px;
+  height:20px;
 }
 
 input:focus {
   outline: 0;
-}
-
-/* bc my imput styles are ignored by p5*/
-button {
-  -webkit-appearance: none;
-  border:1px solid white;
-  background:none;
-  color: white;
-  padding: 1.5em;
-  display: block;
-  width: 100%;
-  margin: none;
 }
 
 button:focus {
@@ -133,6 +97,10 @@ button:focus {
   top: 50px;
 }
 
+#toolbar button {
+  width:100%;
+}
+
 .modal {
   padding: 10%;
   position: fixed;
@@ -142,6 +110,16 @@ button:focus {
   bottom:0;
   flex-direction: column;
   overflow: scroll;
+}
+
+.modal h2 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.modal label {
+  text-transform: uppercase;
+  display: block;
 }
 
 #edit_frame_form {
