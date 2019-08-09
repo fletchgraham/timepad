@@ -13,7 +13,7 @@ Set things up
 1. clone your fork
 1. cd into the project folder
 1. `python -m venv venv`
-1. activate the venv
+1. activate the venv, `$ source <venv>/bin/activate` on bash/zsh, `C:\> <venv>\Scripts\activate.bat` on windows
 1. `pip install -r requirements.txt`
 
 Run development server
