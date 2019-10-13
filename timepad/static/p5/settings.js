@@ -5,6 +5,7 @@ class Settings {
     this.stroke_color = color(255);
     this.active_color = color(255, 200);
     this.sky= false;
+    this.project_colors = {};
   }
 
   load(json) {
@@ -13,6 +14,10 @@ class Settings {
     this.stroke_color = color(json.stroke_color);
     this.active_color = color(json.active_color);
     this.sky = json.sky;
+    this.project_colors = json.project_colors;
+    if (this.project_colors == undefined) {
+      this.project_colors = {};
+    }
   }
 
   save() {
@@ -21,7 +26,8 @@ class Settings {
       fill_color: this.fill_color.toString(),
       stroke_color: this.stroke_color.toString(),
       active_color: this.active_color.toString(),
-      sky: this.sky
+      sky: this.sky,
+      project_colors : this.project_colors
     };
     var msg =  JSON.stringify(ob);
     httpPost('/data/settings', msg, function(result) {

@@ -73,9 +73,12 @@ function edit_btn_callback() {
   }
   model.context = 'form';
   var project_input = select('#project_input');
-  project_input.value(frameset.selected().project);
+  var project = frameset.selected().project
+  project_input.value(project);
   var notes_input = select('#notes_input');
   notes_input.value(frameset.selected().notes);
+  var project_color_input = select('#project_color_input');
+  project_color_input.value(settings.project_colors[project]);
   var form = select('#edit_frame_form');
   select('#toolbar').hide();
   form.style('display', 'flex');
@@ -85,14 +88,17 @@ function edit_btn_callback() {
 }
 
 function done_edit_callback() {
+  var project = frameset.selected().project
   model.context = 'mainscreen';
   frameset.selected().project = select('#project_input').value();
   frameset.selected().notes = select('#notes_input').value();
+  settings.project_colors[project] = select('#project_color_input').value();
   var form = select('#edit_frame_form');
   form.hide();
   select('#toolbar').show();
   redraw();
   sync();
+  settings.save();
 }
 
 function delete_btn_callback() {

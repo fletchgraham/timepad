@@ -146,6 +146,13 @@ class Frame {
 
     let bottom = toPixels(this.start);
     let top = toPixels(this.stop);
+    let project_color = settings.project_colors[this.project]
+
+    if (project_color == undefined) {
+      project_color = color(255)
+    } else {
+      project_color = color(project_color)
+    }
 
     // rectangle
     rectMode(CORNERS);
@@ -160,6 +167,10 @@ class Frame {
       noFill();
     }
     rect(margin, top, width - margin, bottom);
+
+    // color blob
+    fill(project_color)
+    rect(width - margin - 50, top, width-margin, bottom)
 
     // info
     noStroke();
