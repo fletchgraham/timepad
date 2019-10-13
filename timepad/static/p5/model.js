@@ -25,6 +25,7 @@ class Model {
       new_frame.project = i.project;
       new_frame.selected = false;
       new_frame.recording = i.recording;
+      new_frame.notes = i.notes;
       this.frames.push(new_frame);
     }
   }
