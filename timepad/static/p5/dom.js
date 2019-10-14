@@ -21,6 +21,8 @@ function style_the_dom() {
 
   select('html').style('color', stroke_color);
   select('a').style('color', stroke_color);
+  select('nav').style('background-color', fill_color)
+  select('nav').style('border-bottom', '2px solid ' + stroke_color);
 
   if (frameset.recording() == null) {
     stop_btn.hide();
