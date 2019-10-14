@@ -176,13 +176,27 @@ class Frame {
     noStroke();
     fill(sc);
     textSize(16);
+    textAlign(LEFT, TOP);
+    //var wide_enough = textWidth(this.notes) < width - margin * 2;
+    var one_line_high = bottom - top > 30;
+    var two_lines_high = bottom - top > 60;
+
     var dur = secondsToDurHours(this.duration());
     var total = secondsToDurHours(model.duration(this.project));
     var readout = this.project;
     if (this.recording == false) {
       readout += ' ' + dur + ' / ' + total;
     }
-    text(readout, margin + 10, bottom - 10)
+
+    if (one_line_high == false) {
+      return;
+    } else if (two_lines_high == false) {
+      text(readout, margin + 10, top + 10);
+    } else {
+      text(readout, margin + 10, top + 10);
+      text(this.notes, margin + 10, top + 30, width - margin * 2 - 60, bottom - top - 40)
+    }
+
   }
 }
 
