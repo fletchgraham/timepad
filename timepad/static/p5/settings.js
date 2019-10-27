@@ -1,18 +1,26 @@
 class Settings {
   constructor() {
-    this.background_color = color(10);
-    this.fill_color = color(250, 100);
-    this.stroke_color = color(255);
-    this.active_color = color(255, 200);
+    this.background_color = color('rgb(200,200,200)');
+    this.fill_color = color('rgb(255,255,255)');
+    this.stroke_color = color('rgb(0,0,0)');
+    this.active_color = color('rgb(0,255,255)');
     this.sky= false;
     this.project_colors = {};
   }
 
   load(json) {
-    this.background_color = color(json.background_color);
-    this.fill_color = color(json.fill_color);
-    this.stroke_color = color(json.stroke_color);
-    this.active_color = color(json.active_color);
+    try {
+      this.background_color = color(json.background_color);
+      this.fill_color = color(json.fill_color);
+      this.stroke_color = color(json.stroke_color);
+      this.active_color = color(json.active_color);
+    }
+    catch(err) {
+      this.background_color = color('rgb(200,200,200)');
+      this.fill_color = color('rgb(255,255,255)');
+      this.stroke_color = color('rgb(0,0,0)');
+      this.active_color = color('rgb(0,255,255)');
+    }
     this.sky = json.sky;
     this.project_colors = json.project_colors;
     if (this.project_colors == undefined) {
