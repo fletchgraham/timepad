@@ -13,6 +13,9 @@ class Frameset {
       if (frame.recording == true) {
         frame.stop = this.model.offset;
       }
+      if (frame.start > TOP || frame.stop < BOTTOM) {
+        continue;
+      }
       frame.render();
     }
   }

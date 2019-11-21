@@ -26,6 +26,9 @@ let stroke_input;
 let active_input;
 let sky_checkbox;
 
+let TOP;
+let BOTTOM;
+
 //////////////////////////////////////////////////////////////////////////////
 // Setup
 
@@ -64,6 +67,8 @@ function setup() {
 // Draw
 
 function draw() {
+  TOP = toSeconds(0);
+  BOTTOM = toSeconds(height); 
   model.update()
   background(settings.background_color);
 
