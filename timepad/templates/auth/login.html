@@ -1,13 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="post" class="modal">
+<main>
+  <form class="little_form" method="post">
     <h2>{% block title %}Log In{% endblock %}</h2>
-    <label for="username">Username</label>
+    <label for="username">Username: </label>
     <input name="username" type="text" id="username" required>
-    <label for="password">Password</label>
+    <label for="password">Password: </label>
     <input type="password" name="password" id="password" required>
     <br><br>
     <input type="submit" value="LOG IN">
   </form>
+  <div class="about">
+    <h2>A simple visual solution to time tracking in the browser.</h2>
+    <p>
+      Draw out blocks of time (called frames) on an infinite vertical timeline. 
+      Label your frames with a Project, and Notes. Give each Project a unique color.
+      Customize the colorscheme of your timepad with fill, stroke and highlight colors.
+      Useful for planning your day or tracking your time.
+    </p>
+    <h2>Examples:</h2>
+    <img src="{{ url_for('static', filename='img/example1.jpg') }}"/>
+    <img src="{{ url_for('static', filename='img/example2.jpg') }}"/>
+    <img src="{{ url_for('static', filename='img/example3.jpg') }}"/>
+  </div>
+  </main>
 {% endblock %}

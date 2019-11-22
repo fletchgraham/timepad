@@ -28,6 +28,7 @@ nav {
     left:0;
     right:0;
     z-index: 1000;
+    border-bottom: 2px solid white;
   }
 
 nav h1 {
@@ -59,26 +60,27 @@ nav ul li a, nav ul li span, header .action {
   border: 1px solid #ad0000;
 }
 
+input {
+  display: block;
+  margin:auto;
+}
+
 button, input[type=submit]  {
   -webkit-appearance: none;
   border: 2px solid white;
   background: none;
-  display: block;
   color: white;
-  padding: 1em;
+  padding: 10px;
   margin-bottom: 10px;
-  width: 50%;
 }
 
 input[type=text], input[type=password] {
   -webkit-appearance: none;
   border: 2px solid white;
   background: none;
-  display: block;
   color: white;
-  padding: 1em;
+  padding: 10px;
   margin-bottom: 10px;
-  width:100%;
 }
 
 input[type=checkbox] {
@@ -99,6 +101,7 @@ button:focus {
   position: fixed;
   right: 10px;
   top: 50px;
+  width:60px;
 }
 
 #toolbar button {
@@ -112,17 +115,15 @@ button:focus {
   right:0;
   top:0;
   bottom:0;
-  flex-direction: column;
   overflow: scroll;
+  text-align: center;
 }
 
 .modal h2 {
   text-align: center;
-  text-transform: uppercase;
 }
 
 .modal label {
-  text-transform: uppercase;
   display: block;
 }
 
@@ -132,4 +133,26 @@ button:focus {
 
 #settings_form {
   display: none;
+}
+.about {
+  text-align:left;
+  margin:auto;
+  margin-top:70px;
+}
+.about img {
+  margin:1%;
+  width:30%;
+}
+
+.little_form {
+  width:100%;
+  max-width: 500px;
+  margin:auto;
+  text-align: center;
+}
+
+main {
+  width:70%;
+  margin:auto;
+  margin-top:70px;
 }

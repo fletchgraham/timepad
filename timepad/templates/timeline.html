@@ -25,6 +25,7 @@
 </div>
 
 <div id="edit_frame_form" class="modal">
+        <div class="little_form">
     <h2 style="text-align: center;">EDIT FRAME</h2>
     <label for="project">PROJECT</label>
     <input id="project_input" type="text" name="project"></input>
@@ -33,9 +34,11 @@
     <label for="project">COLOR</label>
     <input id="project_color_input" type="text" name="project_color"></input>
     <button id="done_edit_btn" onclick="done_edit_callback()">DONE</button>
+    </div>
 </div>
 
 <div id="settings_form" class="modal">
+    <div class="little_form">
     <h2 style="text-align: center;">SETTINGS</h2>
 
     <p>COLORS</p>
@@ -51,5 +54,6 @@
     <input id = "sky_checkbox" type="checkbox" name="sky" value="sky"></input>
     <br><br>
     <button id="done_settings_btn" onclick="done_settings_callback()">DONE</button>
+</div>
 </div>
 {% endblock %}
