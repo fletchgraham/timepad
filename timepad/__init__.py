@@ -47,6 +47,9 @@ def register_blueprints(app):
     from . import data
     app.register_blueprint(data.bp)
 
+    from . import report
+    app.register_blueprint(report.bp)
+
 def create_structure(app):
     # ensure the instance folder exists
     try:
