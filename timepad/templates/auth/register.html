@@ -1,13 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <form method="post" class="modal">
-    <h2>{% block title %}Register{% endblock %}</h2>
-    <label for="username">Username</label>
-    <input name="username" type="text" id="username" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-    <br><br>
-    <input type="submit" value="REGISTER">
-  </form>
+<main>
+  <div class="header container">
+    <form method="post">
+      <div class="row">
+        <h2 class="eight columns offset-by-two">
+          {% block title %}Register{% endblock %}
+        </h2>
+      </div>
+      <div class="row">
+        <div class="eight columns offset-by-two">
+          <label class="u-full-width"  for="username">Username: </label>
+          <input class="u-full-width" name="username" type="text" id="username" required>
+        </div>
+      </div>
+      <div class="row">
+        <div class="eight columns offset-by-two">
+          <label class="u-full-width"  for="password">Password: </label>
+          <input class="u-full-width" type="password" name="password" id="password" required>
+        </div>
+      </div>
+      <div class="row">
+        <input class="four columns offset-by-six" type="submit" value="REGISTER">
+      </div>
+    </form>
+  </div>
+</main>
 {% endblock %}

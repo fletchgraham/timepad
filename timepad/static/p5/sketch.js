@@ -68,7 +68,7 @@ function setup() {
 
 function draw() {
   TOP = toSeconds(0);
-  BOTTOM = toSeconds(height); 
+  BOTTOM = toSeconds(height);
   model.update()
   background(settings.background_color);
 

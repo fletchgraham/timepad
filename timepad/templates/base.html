@@ -4,24 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <title>timepad</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='skeleton.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 {% block extra_head %}{% endblock %}
 </head>
 
 <body>
 
-<div style="position:fixed; width: 100%;">
+<div>
 
 <nav>
-  <h1>timepad</h1>
+  <a href="{{ url_for('timeline')}}"><h1>timepad <em>alpha</em></h1></a>
   <ul>
     {% if g.user %}
       <li><span>{{ g.user['username'] }}</span></li>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+      <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
     {% else %}
       <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+      <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
     {% endif %}
   </ul>
 </nav>

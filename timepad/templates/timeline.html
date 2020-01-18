@@ -15,6 +15,13 @@
 {% endblock %}
 
 {% block content %}
+
+<style>
+  body {
+      overflow: hidden;
+      overscroll-behavior: none;
+  }
+</style>
 <div id="toolbar">
     <button id="start_btn" onclick="start_btn_callback()">REC</button>
     <button id="stop_btn" onclick="stop_btn_callback()">STOP</button>
@@ -25,20 +32,30 @@
 </div>
 
 <div id="edit_frame_form" class="modal">
-        <div class="little_form">
-    <h2 style="text-align: center;">EDIT FRAME</h2>
-    <label for="project">PROJECT</label>
-    <input id="project_input" type="text" name="project"></input>
-    <label for="project">NOTES</label>
-    <input id="notes_input" type="text" name="notes"></input>
-    <label for="project">COLOR</label>
-    <input id="project_color_input" type="text" name="project_color"></input>
-    <button id="done_edit_btn" onclick="done_edit_callback()">DONE</button>
+    <div class="container">
+      <div class="row">
+        <h2 class="four columns offset-by-four">EDIT FRAME</h2>
+      </div>
+      <div class="row">
+        <label class="four columns" for="project">PROJECT</label>
+        <input class="eight columns" id="project_input" type="text" name="project"></input>
+      </div>
+      <div class="row">
+        <label class="four columns" for="project">NOTES</label>
+        <input class="eight columns"  id="notes_input" type="text" name="notes"></input>
+      </div>
+      <div class="row">
+        <label class="four columns" for="project">COLOR</label>
+        <input class="eight columns" id="project_color_input" type="text" name="project_color"></input>
+        </div>
+      <div class="row">
+        <button class="four columns offset-by-four" id="done_edit_btn" onclick="done_edit_callback()">DONE</button>
+      </div>
     </div>
 </div>
 
 <div id="settings_form" class="modal">
-    <div class="little_form">
+    <div class="container">
     <h2 style="text-align: center;">SETTINGS</h2>
 
     <p>COLORS</p>
