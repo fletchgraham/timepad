@@ -22,7 +22,7 @@ function style_the_dom() {
   select('html').style('color', stroke_color);
   select('a').style('color', stroke_color);
   select('nav').style('background-color', fill_color)
-  select('nav').style('border-bottom', '2px solid ' + stroke_color);
+  select('nav').style('border-bottom', '1px solid ' + stroke_color);
 
   if (frameset.recording() == null) {
     stop_btn.hide();
@@ -32,13 +32,13 @@ function style_the_dom() {
 
   for(let b of selectAll('input')) {
     b.style('background', fill_color);
-    b.style('border', '2px solid ' + stroke_color);
+    b.style('border', '1px solid ' + stroke_color);
     b.style('color', stroke_color);
   }
 
   for(let b of selectAll('button')) {
     b.style('background', fill_color);
-    b.style('border', '2px solid ' + stroke_color);
+    b.style('border', '1px solid ' + stroke_color);
     b.style('color', stroke_color);
   }
 
